@@ -1,0 +1,1629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVET MEDICAL - Beauty Salon</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="reset.css">
+    <style>
+        :root {
+            --primary-color: #c9a96e;
+            --primary-dark: #a07840;
+            --secondary-color: #f3e9d2;
+            --text-dark: #2c2c2c;
+            --text-light: #7a7a7a;
+            --bg-light: #fdf8f2;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /*  GLOBAL CONTAINER  */
+        .container {
+            width: min(1600px, 100% - 4rem);
+            margin-inline: auto;
+        }
+
+        /*  NAVIGATION - */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--white);
+            box-shadow: var(--shadow);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            padding: 1rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo-img {
+            height: 80px;
+            width: auto;
+            display: block;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            color: var(--text-dark);
+        }
+
+        .logo-text span {
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            letter-spacing: 0.03em;
+            transition: color 0.3s;
+            text-decoration: none;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-cta {
+            background: var(--primary-color);
+            color: var(--white) !important;
+            padding: 0.6rem 1.4rem;
+            border-radius: 25px;
+            font-weight: 600 !important;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .nav-cta:hover {
+            background: var(--primary-dark) !important;
+            transform: translateY(-2px);
+        }
+
+        /*  HERO  */
+        .hero {
+            margin-top: 74px;
+            height: calc(100vh - 74px);
+            display: flex;
+            align-items: stretch;
+            background: var(--bg-light);
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .hero-inner {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        .hero-text {
+            flex: 1.2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem;
+            text-align: left;
+        }
+
+        .hero-text > * {
+            width: 100%;
+            max-width: 480px;
+        }
+
+        .hero-tagline {
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .hero-text h1 {
+            font-size: 3.2rem;
+            line-height: 1.15;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-text h1 span { color: var(--primary-color); }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+            max-width: 480px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 0.85rem 2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border: 2px solid var(--primary-color);
+            transition: background 0.3s, transform 0.2s;
+            text-decoration: none;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            border-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary-color);
+            padding: 0.85rem 2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border: 2px solid var(--primary-color);
+            transition: background 0.3s, color 0.3s, transform 0.2s;
+            text-decoration: none;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        .hero-image {
+            flex: 0.8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 4rem 3rem 2rem;
+            background: var(--bg-light);
+        }
+
+        .hero-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 28px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+            display: block;
+        }
+
+        /*  PHOTO PLACEHOLDER (shared)  */
+        .photo-placeholder {
+            width: 100%;
+            max-width: 480px;
+            aspect-ratio: 4 / 5;
+            background: var(--secondary-color);
+            border: 2px dashed var(--primary-color);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            color: var(--primary-color);
+            font-size: 0.85rem;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .photo-placeholder .ph-icon { font-size: 2.5rem; }
+
+        /*  SECTION COMMONS  */
+        section { padding: 5rem 2rem; }
+
+        .section-inner {
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .eyebrow {
+            font-size: 0.8rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--primary-color);
+            font-weight: 600;
+            display: block;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.2rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: var(--text-light);
+            max-width: 560px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /*  ABOUT  */
+        .about { background: var(--white); }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-photo {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            display: block;
+            object-fit: cover;
+        }
+
+        .about-text h2 {
+            font-size: 2rem;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+        }
+
+        .about-text h2 span { color: var(--primary-color); }
+
+        .about-text p {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 1.25rem;
+        }
+
+        .about-stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2.5rem;
+        }
+
+        .stat { text-align: center; }
+        .stat .number { font-size: 2rem; font-weight: 700; color: var(--primary-color); }
+        .stat .label  { font-size: 0.85rem; color: var(--text-light); }
+
+        /*  SERVICES  */
+        .services { background: var(--bg-light); }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-auto-rows: 1fr;
+            gap: 2.5rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+
+        .service-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* single photo card */
+        .service-card .card-img-single {
+            flex: 1;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        /* two photos side by side */
+        .service-card .card-img-duo {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            overflow: hidden;
+            gap: 3px;
+        }
+
+        .service-card .card-img-duo img {
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .service-card .card-img-duo img:hover { opacity: 0.88; }
+        .service-card .card-img-single img:hover { opacity: 0.88; }
+
+        .service-card-body {
+            padding: 1.25rem 1.5rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .service-card-body h3 {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            font-weight: 700;
+            letter-spacing: 0.03em;
+        }
+
+        .service-card-body .view-btn {
+            font-size: 0.8rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            background: none;
+            padding: 0;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        /* service cover image */
+        .service-card .card-cover {
+            position: relative;
+            overflow: hidden;
+            height: 260px;
+            cursor: pointer;
+        }
+
+        .service-card .card-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s;
+        }
+
+        .service-card .card-cover:hover img { transform: scale(1.04); }
+
+        .service-card .card-cover .cover-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.18);
+            display: flex;
+            align-items: flex-end;
+            padding: 1rem 1.25rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .service-card .card-cover:hover .cover-overlay { opacity: 1; }
+
+        .cover-overlay span {
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        /* PRICE PANEL */
+        .price-panel-backdrop {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.55);
+            z-index: 9000;
+        }
+
+        .price-panel-backdrop.active { display: block; }
+
+        .price-panel {
+            position: fixed;
+            top: 0;
+            right: -520px;
+            width: min(500px, 100vw);
+            height: 100vh;
+            background: var(--white);
+            z-index: 9001;
+            overflow-y: auto;
+            transition: right 0.35s cubic-bezier(.4,0,.2,1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .price-panel.open { right: 0; }
+
+        .price-panel-header {
+            position: sticky;
+            top: 0;
+            background: var(--white);
+            padding: 1.5rem 1.75rem 1rem;
+            border-bottom: 1px solid #f0e8db;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 1;
+        }
+
+        .price-panel-header h2 {
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            margin: 0;
+        }
+
+        .price-panel-close {
+            background: none;
+            border: none;
+            font-size: 1.6rem;
+            cursor: pointer;
+            color: var(--text-dark);
+            opacity: 0.6;
+            line-height: 1;
+            transition: opacity 0.2s;
+        }
+
+        .price-panel-close:hover { opacity: 1; }
+
+        .price-panel-cover {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .price-panel-body {
+            padding: 1.25rem 1.75rem;
+            flex: 1;
+        }
+
+        #pp-photos {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        #pp-photos img {
+            width: 100%;
+            border-radius: 10px;
+            display: block;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            cursor: zoom-in;
+            transition: opacity 0.2s;
+        }
+
+        #pp-photos img:hover { opacity: 0.9; }
+
+        /* price photo zoom overlay */
+        .price-zoom-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.96);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+
+        .price-zoom-overlay.active { display: flex; }
+
+        .price-zoom-overlay img {
+            max-width: 92vw;
+            max-height: 92vh;
+            border-radius: 12px;
+            object-fit: contain;
+            box-shadow: 0 8px 48px rgba(0,0,0,0.6);
+            cursor: zoom-out;
+        }
+
+        .price-zoom-close {
+            position: fixed;
+            top: 1.25rem;
+            right: 1.5rem;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            z-index: 10001;
+            opacity: 0.75;
+            transition: opacity 0.2s;
+            line-height: 1;
+        }
+
+        .price-zoom-close:hover { opacity: 1; }
+
+        .price-panel-cta {
+            margin: 1.5rem 1.75rem 2rem;
+            display: block;
+            text-align: center;
+            background: var(--primary-color);
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 0.9rem;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .price-panel-cta:hover { background: var(--primary-dark); }
+
+        /* -- LIGHTBOX ------------------------------- */
+        .lightbox-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.92);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .lightbox-overlay.active { display: flex; }
+
+        .lightbox-img-wrap {
+            position: relative;
+            max-width: 90vw;
+            max-height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-img-wrap img {
+            max-width: 90vw;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+        }
+
+        .lightbox-close {
+            position: fixed;
+            top: 1.25rem;
+            right: 1.5rem;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            line-height: 1;
+            z-index: 10000;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+
+        .lightbox-close:hover { opacity: 1; }
+
+        .lightbox-arrow {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.15);
+            border: none;
+            color: #fff;
+            font-size: 2rem;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10000;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-arrow:hover { background: rgba(255,255,255,0.3); }
+        .lightbox-arrow.prev { left: 1rem; }
+        .lightbox-arrow.next { right: 1rem; }
+
+        .lightbox-counter {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.85rem;
+            margin-top: 1rem;
+            letter-spacing: 0.1em;
+        }
+
+        /*  GALLERY  */
+        .gallery { background: var(--white); }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .gallery-item {
+            background: var(--secondary-color);
+            border: 2px dashed var(--primary-color);
+            border-radius: 12px;
+            aspect-ratio: 1 / 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            color: var(--primary-color);
+            font-size: 0.78rem;
+            text-align: center;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover { transform: scale(1.03); }
+        .gallery-item.wide  { grid-column: span 2; aspect-ratio: 2 / 1; }
+        .gallery-item .ph-icon { font-size: 2rem; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; border-radius: 10px; display: block; }
+
+        /* video gallery card */
+        .gallery-item.video-card {
+            position: relative;
+            overflow: hidden;
+            border: none;
+            background: #111;
+        }
+
+        .gallery-item.video-card video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            pointer-events: none;
+        }
+
+        .gallery-item.video-card .play-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.35);
+            transition: background 0.3s;
+            gap: 0.5rem;
+        }
+
+        .gallery-item.video-card:hover .play-overlay { background: rgba(0,0,0,0.15); }
+
+        .play-btn-circle {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            color: var(--primary-dark);
+            transition: transform 0.2s;
+        }
+
+        .gallery-item.video-card:hover .play-btn-circle { transform: scale(1.1); }
+
+        .play-overlay span {
+            color: #fff;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        /* video lightbox */
+        .video-lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.94);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-lightbox.active { display: flex; }
+
+        .video-lightbox video {
+            max-width: 90vw;
+            max-height: 85vh;
+            border-radius: 16px;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+        }
+
+        .video-lightbox-close {
+            position: fixed;
+            top: 1.25rem;
+            right: 1.5rem;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            z-index: 10000;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+
+        .video-lightbox-close:hover { opacity: 1; }
+
+        /*  TEAM  */
+        .team { background: var(--bg-light); }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .team-card {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .team-card:hover { transform: translateY(-4px); }
+
+        .team-card .photo-placeholder {
+            max-width: 100%;
+            aspect-ratio: 3 / 4;
+            border-radius: 0;
+            border-left: none;
+            border-right: none;
+            border-top: none;
+        }
+
+        .team-card-body { padding: 1.25rem; }
+        .team-card-body h3   { font-size: 1rem; color: var(--text-dark); margin-bottom: 0.25rem; }
+        .team-card-body .role { font-size: 0.85rem; color: var(--primary-color); }
+
+        /*  TESTIMONIALS  */
+        .testimonials { background: var(--white); }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: var(--bg-light);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .testimonial-stars { color: var(--primary-color); font-size: 1.1rem; margin-bottom: 1rem; }
+
+        .testimonial-text {
+            color: var(--text-light);
+            line-height: 1.8;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-author { display: flex; align-items: center; gap: 0.75rem; }
+
+        .avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--secondary-color);
+            border: 2px dashed var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.6rem;
+            color: var(--primary-color);
+            flex-shrink: 0;
+            font-weight: 700;
+        }
+
+        .author-name  { font-weight: 600; color: var(--text-dark); font-size: 0.9rem; }
+        .author-label { font-size: 0.8rem; color: var(--text-light); }
+
+        /*  BOOKING / CTA  */
+        .booking {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .booking .eyebrow { opacity: 0.8; }
+
+        .booking h2 {
+            font-size: 2.4rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .booking p {
+            opacity: 0.9;
+            max-width: 520px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.8;
+        }
+
+        .booking-form {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .booking-form input,
+        .booking-form select {
+            padding: 0.85rem 1.5rem;
+            border-radius: 30px;
+            border: none;
+            outline: none;
+            font-size: 0.95rem;
+            min-width: 180px;
+            background: rgba(255,255,255,0.95);
+            color: var(--text-dark);
+        }
+
+        .btn-white {
+            background: var(--white);
+            color: var(--primary-color);
+            padding: 0.85rem 2rem;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            border: none;
+            cursor: pointer;
+            transition: opacity 0.3s, transform 0.2s;
+        }
+
+        .btn-white:hover { opacity: 0.88; transform: translateY(-2px); }
+
+        /*  CONTACT  */
+        .contact { background: var(--bg-light); }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .contact-info h2 { font-size: 2rem; color: var(--text-dark); margin-bottom: 1.5rem; }
+        .contact-info h2 span { color: var(--primary-color); }
+
+        .contact-detail { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.5rem; }
+
+        .detail-icon {
+            width: 44px; height: 44px;
+            background: var(--secondary-color);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; flex-shrink: 0;
+        }
+
+        .detail-text strong { display: block; color: var(--text-dark); font-size: 0.9rem; margin-bottom: 0.2rem; }
+        .detail-text span   { color: var(--text-light); font-size: 0.9rem; }
+
+        .map-placeholder {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            background: var(--secondary-color);
+            border: 2px dashed var(--primary-color);
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            color: var(--primary-color);
+            font-size: 0.9rem;
+        }
+
+        .map-placeholder .ph-icon { font-size: 2.5rem; }
+
+        /*  FOOTER  */
+        footer {
+            background: var(--text-dark);
+            color: rgba(255,255,255,0.75);
+            padding: 3rem 2rem 1.5rem;
+        }
+
+        .footer-inner {  }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            padding-bottom: 2.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-brand .logo-text { color: var(--white); display: block; margin-bottom: 1rem; }
+        .footer-brand p { font-size: 0.9rem; line-height: 1.7; }
+
+        .footer-col h4 {
+            color: var(--white);
+            font-size: 0.9rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 1.25rem;
+        }
+
+        .footer-col a {
+            display: block;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.65);
+            margin-bottom: 0.6rem;
+            transition: color 0.3s;
+            text-decoration: none;
+        }
+
+        .footer-col a:hover { color: var(--primary-color); }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+        }
+
+        .social-links { display: flex; gap: 1rem; }
+
+        .social-link {
+            width: 36px; height: 36px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.85rem; font-weight: 700;
+            color: rgba(255,255,255,0.75);
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .social-link:hover { background: var(--primary-color); }
+
+        /* LANGUAGE SWITCHER */
+        .lang-switcher {
+            display: flex;
+            gap: 0.25rem;
+            margin-left: 1.5rem;
+            border: 1.5px solid var(--primary-color);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        .lang-btn {
+            background: none;
+            border: none;
+            padding: 0.35rem 0.75rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            color: var(--primary-color);
+            letter-spacing: 0.05em;
+            transition: background 0.2s, color 0.2s;
+        }
+        .lang-btn.active {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 
+         NAVIGATION
+     -->
+    <nav>
+        <div class="nav-container container">
+            <div class="logo-wrapper">
+                <!-- LOGO PLACEHOLDER -->
+                <img src="images/logo.jpeg" alt="SVET MEDICAL Logo" class="logo-img">
+                <div class="logo-text">SVET <span>MEDICAL</span></div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#about" data-en="About" data-ro="Despre">About</a></li>
+                <li><a href="#services" data-en="Services" data-ro="Servicii">Services</a></li>
+                <li><a href="#gallery" data-en="Gallery" data-ro="Galerie">Gallery</a></li>
+                <li><a href="#team" data-en="Our Team" data-ro="Echipa">Our Team</a></li>
+                <li><a href="#contact" data-en="Contact" data-ro="Contact">Contact</a></li>
+                <li><a href="#booking" class="nav-cta" data-en="Book Now" data-ro="Programare">Book Now</a></li>
+            </ul>
+            <div class="lang-switcher">
+                <button class="lang-btn active" onclick="setLang('en')">EN</button>
+                <button class="lang-btn" onclick="setLang('ro')">RO</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 
+         HERO
+     -->
+    <section class="hero">
+        <div class="hero-inner">
+            <div class="hero-text">
+                <p class="hero-tagline" data-en="Premium Beauty &amp; Medical Aesthetics" data-ro="Frumusețe Premium &amp; Estetică Medicală">Premium Beauty &amp; Medical Aesthetics</p>
+                <h1 data-en="Your Beauty,<br>Our <span>Expertise</span>" data-ro="Frumusețea Ta,<br><span>Expertiza</span> Noastră">Your Beauty,<br>Our <span>Expertise</span></h1>
+                <p data-en="At SVET MEDICAL we blend cutting-edge medical aesthetics with luxurious beauty treatments, tailored exclusively for you." data-ro="La SVET MEDICAL îmbinăm estetica medicală de ultimă generație cu tratamente de frumusețe luxoase, concepute exclusiv pentru tine.">At SVET MEDICAL we blend cutting-edge medical aesthetics with luxurious beauty treatments, tailored exclusively for you.</p>
+                <div class="hero-actions">
+                    <a href="#booking" class="btn-primary" data-en="Book an Appointment" data-ro="Fă o Programare">Book an Appointment</a>
+                    <a href="#services" class="btn-outline" data-en="View Services" data-ro="Vezi Serviciile">View Services</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <video class="hero-photo" autoplay loop muted playsinline>
+                    <source src="images/video3.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- 
+         ABOUT
+     -->
+    <section class="about" id="about">
+        <div class="section-inner container">
+            <div class="about-grid">
+                <div class="about-image">
+                    <img src="images/16.png" alt="SVET MEDICAL Salon" class="about-photo">
+                </div>
+                <div class="about-text">
+                    <h2 data-en="More than a salon <br>a <span>medical experience</span>" data-ro="Mai mult decât un salon <br>o <span>experiență medicală</span>">More than a salon <br>a <span>medical experience</span></h2>
+                    <p data-en="SVET MEDICAL was founded on the belief that true beauty comes from within. Our certified specialists combine medical-grade treatments with personalised care to help you look and feel your best." data-ro="SVET MEDICAL a fost fondată pe convingerea că frumusețea adevărată vine din interior. Specialiștii noștri certificați combină tratamente medicale cu îngrijire personalizată.">SVET MEDICAL was founded on the belief that true beauty comes from within. Our certified specialists combine medical-grade treatments with personalised care to help you look and feel your best.</p>
+                    <p data-en="From advanced skin therapies to classic beauty rituals, every visit is a step toward a more confident you." data-ro="De la terapii avansate pentru piele la ritualuri clasice de frumusețe, fiecare vizită este un pas spre o versiune mai încrezătoare a ta.">From advanced skin therapies to classic beauty rituals, every visit is a step toward a more confident you.</p>
+                    <div class="about-stats">
+                        <div class="stat">
+                            <div class="number">10+</div>
+                            <div class="label" data-en="Years of Experience" data-ro="Ani de Experiență">Years of Experience</div>
+                        </div>
+                        <div class="stat">
+                            <div class="number">3k+</div>
+                            <div class="label" data-en="Happy Clients" data-ro="Clienți Fericiți">Happy Clients</div>
+                        </div>
+                        <div class="stat">
+                            <div class="number">25+</div>
+                            <div class="label" data-en="Treatments" data-ro="Tratamente">Treatments</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 
+         SERVICES
+     -->
+    <section class="services" id="services">
+        <div class="section-inner container">
+            <div class="section-header">
+                <span class="eyebrow" data-en="What We Offer" data-ro="Ce Oferim">What We Offer</span>
+                <h2 data-en="Our Services" data-ro="Serviciile Noastre">Our Services</h2>
+                <p data-en="A selection of medical aesthetic and beauty treatments, designed especially for you." data-ro="O selec&#x21B;ie de tratamente estetice medicale &#x219;i de &#xEE;nfrumuse&#x21B;are, g&#xE2;ndite special pentru tine.">A selection of medical aesthetic and beauty treatments, designed especially for you.</p>
+            </div>
+            <div class="services-grid">
+
+                <!-- HIFU -->
+                <div class="service-card" onclick="openPricePanel('hifu')" style="cursor:pointer">
+                    <div class="card-cover">
+                        <img src="images/HIFO.jpg" alt="HIFU">
+                        <div class="cover-overlay"><span data-en="View Prices" data-ro="Vezi Prețuri">View Prices</span></div>
+                    </div>
+                    <div class="service-card-body">
+                        <h3>HIFU</h3>
+                        <button class="view-btn" data-en="View Prices &rsaquo;" data-ro="Vezi Pre&#x21B;uri &rsaquo;">View Prices &rsaquo;</button>
+                    </div>
+                </div>
+
+                <!-- Pentru Femei -->
+                <div class="service-card" onclick="openPricePanel('femei')" style="cursor:pointer">
+                    <div class="card-cover">
+                        <img src="images/for_women.jpg" alt="For Women">
+                        <div class="cover-overlay"><span data-en="View Prices" data-ro="Vezi Prețuri">View Prices</span></div>
+                    </div>
+                    <div class="service-card-body">
+                        <h3 data-en="For Women" data-ro="Pentru Femei">For Women</h3>
+                        <button class="view-btn" data-en="View Prices &rsaquo;" data-ro="Vezi Pre&#x21B;uri &rsaquo;">View Prices &rsaquo;</button>
+                    </div>
+                </div>
+
+                <!-- EMS Shape -->
+                <div class="service-card" onclick="openPricePanel('ems')" style="cursor:pointer">
+                    <div class="card-cover">
+                        <img src="images/ems_shape.jpg" alt="EMS Shape">
+                        <div class="cover-overlay"><span data-en="View Prices" data-ro="Vezi Prețuri">View Prices</span></div>
+                    </div>
+                    <div class="service-card-body">
+                        <h3>EMS Shape</h3>
+                        <button class="view-btn" data-en="View Prices &rsaquo;" data-ro="Vezi Pre&#x21B;uri &rsaquo;">View Prices &rsaquo;</button>
+                    </div>
+                </div>
+
+                <!-- Pentru Bărbați -->
+                <div class="service-card" onclick="openPricePanel('barbati')" style="cursor:pointer">
+                    <div class="card-cover">
+                        <img src="images/for_men.jpg" alt="For Men">
+                        <div class="cover-overlay"><span data-en="View Prices" data-ro="Vezi Prețuri">View Prices</span></div>
+                    </div>
+                    <div class="service-card-body">
+                        <h3 data-en="For Men" data-ro="Pentru Bărbați">For Men</h3>
+                        <button class="view-btn" data-en="View Prices &rsaquo;" data-ro="Vezi Pre&#x21B;uri &rsaquo;">View Prices &rsaquo;</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 
+         GALLERY
+     -->
+    <section class="gallery" id="gallery">
+        <div class="section-inner container">
+            <div class="section-header">
+                <span class="eyebrow" data-en="Our Work" data-ro="Munca Noastră">Our Work</span>
+                <h2 data-en="Gallery" data-ro="Galerie">Gallery</h2>
+                <p data-en="A glimpse into the transformations and experiences at SVET MEDICAL." data-ro="O privire asupra transformărilor și experiențelor de la SVET MEDICAL.">A glimpse into the transformations and experiences at SVET MEDICAL.</p>
+            </div>
+            <div class="gallery-grid">
+                <!-- Video 4 -->
+                <div class="gallery-item wide video-card" onclick="openVideoLightbox('images/video4.mp4')">
+                    <video src="images/video4.mp4" muted preload="metadata"></video>
+                    <div class="play-overlay">
+                        <div class="play-btn-circle">&#9654;</div>
+                        <span data-en="Watch Video" data-ro="Vezi Video">Watch Video</span>
+                    </div>
+                </div>
+
+                <!-- Video 5 -->
+                <div class="gallery-item wide video-card" onclick="openVideoLightbox('images/video5.mp4')">
+                    <video src="images/video5.mp4" muted preload="metadata"></video>
+                    <div class="play-overlay">
+                        <div class="play-btn-circle">&#9654;</div>
+                        <span data-en="Watch Video" data-ro="Vezi Video">Watch Video</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 
+         TEAM
+     -->
+    <section class="team" id="team">
+        <div class="section-inner container">
+            <div class="section-header">
+                <span class="eyebrow" data-en="The People Behind Your Beauty" data-ro="Oamenii Din Spatele Frumuseții">The People Behind Your Beauty</span>
+                <h2 data-en="Our Team" data-ro="Echipa Noastră">Our Team</h2>
+                <p data-en="Meet our talented and certified specialists dedicated to your care." data-ro="Cunoașteți specialiștii noștri talentați și certificați, dedicați îngrijirii dumneavoastră.">Meet our talented and certified specialists dedicated to your care.</p>
+            </div>
+            <div class="team-grid">
+
+                <div class="team-card">
+                    <div class="photo-placeholder"><span class="ph-icon"></span><span>Team Photo</span></div>
+                    <div class="team-card-body">
+                        <h3>Dr. Anna Ivanova</h3>
+                        <span class="role">Medical Aesthetics</span>
+                    </div>
+                </div>
+
+                <div class="team-card">
+                    <div class="photo-placeholder"><span class="ph-icon"></span><span>Team Photo</span></div>
+                    <div class="team-card-body">
+                        <h3>Maria Petrova</h3>
+                        <span class="role">Senior Cosmetologist</span>
+                    </div>
+                </div>
+
+                <div class="team-card">
+                    <div class="photo-placeholder"><span class="ph-icon"></span><span>Team Photo</span></div>
+                    <div class="team-card-body">
+                        <h3>Elena Koroleva</h3>
+                        <span class="role">Laser Specialist</span>
+                    </div>
+                </div>
+
+                <div class="team-card">
+                    <div class="photo-placeholder"><span class="ph-icon"></span><span>Team Photo</span></div>
+                    <div class="team-card-body">
+                        <h3>Sofia Novikova</h3>
+                        <span class="role">Makeup Artist</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 
+         TESTIMONIALS
+     -->
+    <section class="testimonials">
+        <div class="section-inner container">
+            <div class="section-header">
+                <span class="eyebrow" data-en="Client Stories" data-ro="Poveștile Clienților">Client Stories</span>
+                <h2 data-en="What Our Clients Say" data-ro="Ce Spun Clienții Noștri">What Our Clients Say</h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-stars"></div>
+                    <p class="testimonial-text" data-en='"Incredible experience! The staff at SVET MEDICAL are true professionals. My skin has never looked better."' data-ro='"Experiență incredibilă! Personalul de la SVET MEDICAL sunt adevărați profesioniști. Pielea mea nu a arătat niciodată mai bine."'>"Incredible experience! The staff at SVET MEDICAL are true professionals. My skin has never looked better."</p>
+                    <div class="testimonial-author">
+                        <div class="avatar">PH</div>
+                        <div>
+                            <div class="author-name">Olga S.</div>
+                            <div class="author-label" data-en="Facial Treatment" data-ro="Tratament Facial">Facial Treatment</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars"></div>
+                    <p class="testimonial-text" data-en='"I came for laser therapy and left feeling like a completely different person. Highly recommend!"' data-ro='"Am venit pentru terapie laser și am plecat simțindu-mă o persoană complet diferită. Recomand cu căldură!"'>"I came for laser therapy and left feeling like a completely different person. Highly recommend!"</p>
+                    <div class="testimonial-author">
+                        <div class="avatar">PH</div>
+                        <div>
+                            <div class="author-name">Natalia K.</div>
+                            <div class="author-label" data-en="Laser Therapy" data-ro="Terapie Laser">Laser Therapy</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars"></div>
+                    <p class="testimonial-text" data-en='"A truly luxurious salon with medical expertise. The team makes you feel valued every step of the way."' data-ro='"Un salon cu adevărat luxos cu expertiză medicală. Echipa te face să te simți apreciat la fiecare pas."'>"A truly luxurious salon with medical expertise. The team makes you feel valued every step of the way."</p>
+                    <div class="testimonial-author">
+                        <div class="avatar">PH</div>
+                        <div>
+                            <div class="author-name">Irina M.</div>
+                            <div class="author-label" data-en="Body Contouring" data-ro="Conturare Corporală">Body Contouring</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 
+         BOOKING / CTA
+     -->
+    <section class="booking" id="booking">
+        <div class="section-inner container">
+            <span class="eyebrow" data-en="Ready to Begin?" data-ro="Gata să Începi?">Ready to Begin?</span>
+            <h2 data-en="Book Your Appointment" data-ro="Fă o Programare">Book Your Appointment</h2>
+            <p data-en="Choose your preferred service and let us take care of the rest. We look forward to welcoming you at SVET MEDICAL." data-ro="Alege serviciul preferat și lasă-ne pe noi să ne ocupăm de restul. Așteptăm cu nerăbdare să te primim la SVET MEDICAL.">Choose your preferred service and let us take care of the rest. We look forward to welcoming you at SVET MEDICAL.</p>
+            <div class="booking-form">
+                <input type="text" placeholder="Your Name" data-en-placeholder="Your Name" data-ro-placeholder="Numele Tău">
+                <input type="tel" placeholder="Phone Number" data-en-placeholder="Phone Number" data-ro-placeholder="Număr de Telefon">
+                <select>
+                    <option value="" disabled selected data-en="Select a service" data-ro="Selectează un serviciu">Select a service</option>
+                    <option data-en="HIFU" data-ro="HIFU">HIFU</option>
+                    <option data-en="For Women" data-ro="Pentru Femei">For Women</option>
+                    <option data-en="EMS Shape" data-ro="EMS Shape">EMS Shape</option>
+                    <option data-en="For Men" data-ro="Pentru Bărbați">For Men</option>
+                </select>
+                <input type="date">
+                <button class="btn-white" data-en="Book Now" data-ro="Programează">Book Now</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 
+         CONTACT
+     -->
+    <section class="contact" id="contact">
+        <div class="section-inner container">
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h2 data-en="Find Us at<br><span>SVET MEDICAL</span>" data-ro="Găsește-ne la<br><span>SVET MEDICAL</span>">Find Us at<br><span>SVET MEDICAL</span></h2>
+                    <div class="contact-detail">
+                        <div class="detail-icon"></div>
+                        <div class="detail-text">
+                            <strong data-en="Address" data-ro="Adresă">Address</strong>
+                            <span>Barbu Văcărescu 164, București</span>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="detail-icon"></div>
+                        <div class="detail-text">
+                            <strong data-en="Phone" data-ro="Telefon">Phone</strong>
+                            <span>+40788844819</span>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="detail-icon"></div>
+                        <div class="detail-text">
+                            <strong data-en="Email" data-ro="Email">Email</strong>
+                            <span>svetmed@gmail.com</span>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="detail-icon"></div>
+                        <div class="detail-text">
+                            <strong data-en="Working Hours" data-ro="Program de Lucru">Working Hours</strong>
+                            <span data-en="Mon - Sat: 9:00 AM - 8:00 PM" data-ro="Lun - Sâm: 09:00 - 20:00">Mon - Sat: 9:00 AM - 8:00 PM</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <!-- MAP PLACEHOLDER -->
+                    <div class="map-placeholder">
+                        <span class="ph-icon"></span>
+                        <strong>Map Placeholder</strong>
+                        <span>Embed Google Maps here</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 
+         FOOTER
+     -->
+    <footer>
+        <div class="footer-inner container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <span class="logo-text">SVET <span>MEDICAL</span></span>
+                    <p data-en="Premium beauty and medical aesthetic treatments. Your transformation begins here." data-ro="Tratamente premium de frumusețe și estetică medicală. Transformarea ta începe aici.">Premium beauty and medical aesthetic treatments. Your transformation begins here.</p>
+                </div>
+                <div class="footer-col">
+                    <h4 data-en="Services" data-ro="Servicii">Services</h4>
+                    <a href="#services">HIFU</a>
+                    <a href="#services" data-en="For Women" data-ro="Pentru Femei">For Women</a>
+                    <a href="#services">EMS Shape</a>
+                    <a href="#services" data-en="For Men" data-ro="Pentru Bărbați">For Men</a>
+                </div>
+                <div class="footer-col">
+                    <h4 data-en="Company" data-ro="Companie">Company</h4>
+                    <a href="#about" data-en="About Us" data-ro="Despre Noi">About Us</a>
+                    <a href="#team" data-en="Our Team" data-ro="Echipa">Our Team</a>
+                    <a href="#gallery" data-en="Gallery" data-ro="Galerie">Gallery</a>
+                    <a href="#" data-en="Blog" data-ro="Blog">Blog</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <a href="https://maps.google.com/?q=Barbu+Vacarescu+164+Bucuresti" target="_blank">Barbu Văcărescu 164, București</a>
+                    <a href="tel:+40788844819">+40788844819</a>
+                    <a href="mailto:svetmed@gmail.com">svetmed@gmail.com</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2026 SVET MEDICAL. All rights reserved.</span>
+                <div class="social-links">
+                    <a href="#" class="social-link">f</a>
+                    <a href="#" class="social-link">in</a>
+                    <a href="#" class="social-link">ig</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- PRICE PHOTO ZOOM -->
+    <div class="price-zoom-overlay" id="price-zoom" onclick="closePriceZoom()">
+        <button class="price-zoom-close" onclick="closePriceZoom()">&times;</button>
+        <img id="price-zoom-img" src="" alt="Price list">
+    </div>
+
+    <!-- PRICE PANEL BACKDROP -->
+    <div class="price-panel-backdrop" id="price-backdrop" onclick="closePricePanel()"></div>
+
+    <!-- PRICE PANEL -->
+    <aside class="price-panel" id="price-panel">
+        <div class="price-panel-header">
+            <h2 id="pp-title">HIFU</h2>
+            <button class="price-panel-close" onclick="closePricePanel()">&times;</button>
+        </div>
+        <img class="price-panel-cover" id="pp-cover" src="" alt="">
+        <div class="price-panel-body">
+            <div id="pp-photos"></div>
+        </div>
+        <a href="#booking" class="price-panel-cta" onclick="closePricePanel()" data-en="Book an Appointment" data-ro="Programeaz&#x103;-te">Book an Appointment</a>
+    </aside>
+
+    <!-- VIDEO LIGHTBOX -->
+    <div class="video-lightbox" id="video-lightbox" onclick="closeVideoLightboxOnBg(event)">
+        <button class="video-lightbox-close" onclick="closeVideoLightbox()">&times;</button>
+        <video id="lightbox-video" controls autoplay playsinline style="max-width:90vw;max-height:85vh;border-radius:16px;"></video>
+    </div>
+
+    <!-- LIGHTBOX --> ----------------------------------- -->
+    <div class="lightbox-overlay" id="lightbox" onclick="closeLightboxOnBg(event)">
+        <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+        <button class="lightbox-arrow prev" onclick="lightboxNav(-1)">&#8249;</button>
+        <div class="lightbox-img-wrap">
+            <img id="lightbox-img" src="" alt="">
+        </div>
+        <button class="lightbox-arrow next" onclick="lightboxNav(1)">&#8250;</button>
+        <div class="lightbox-counter" id="lightbox-counter"></div>
+    </div>
+
+    <script>
+        const galleries = {
+            hifu:    ['images/1.jpeg', 'images/2.jpeg'],
+            femei:   ['images/3.jpeg', 'images/4.jpeg'],
+            ems:     ['images/5.jpeg'],
+            barbati: ['images/6.jpeg', 'images/7.jpeg']
+        };
+
+        let currentGallery = [];
+        let currentIndex   = 0;
+
+        function openLightbox(category, index) {
+            currentGallery = galleries[category];
+            currentIndex   = index;
+            updateLightbox();
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function closeLightboxOnBg(e) {
+            if (e.target === document.getElementById('lightbox')) closeLightbox();
+        }
+
+        function lightboxNav(dir) {
+            currentIndex = (currentIndex + dir + currentGallery.length) % currentGallery.length;
+            updateLightbox();
+        }
+
+        function updateLightbox() {
+            document.getElementById('lightbox-img').src = currentGallery[currentIndex];
+            document.getElementById('lightbox-counter').textContent =
+                (currentIndex + 1) + ' / ' + currentGallery.length;
+            // hide arrows if only 1 photo
+            const arrows = document.querySelectorAll('.lightbox-arrow');
+            arrows.forEach(a => a.style.display = currentGallery.length > 1 ? 'flex' : 'none');
+        }
+
+        // keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                if (document.getElementById('price-zoom').classList.contains('active')) { closePriceZoom(); return; }
+                if (document.getElementById('price-panel').classList.contains('open')) { closePricePanel(); return; }
+                if (document.getElementById('video-lightbox').classList.contains('active')) { closeVideoLightbox(); return; }
+                closeLightbox();
+                return;
+            }
+            if (document.getElementById('video-lightbox').classList.contains('active')) return;
+            if (!document.getElementById('lightbox').classList.contains('active')) return;
+            if (e.key === 'ArrowRight') lightboxNav(1);
+            if (e.key === 'ArrowLeft')  lightboxNav(-1);
+        });
+
+        // ── PRICE PANEL ─────────────────────────────────────────────
+        const priceData = {
+            hifu:    { en: 'HIFU',       ro: 'HIFU',             cover: 'images/HIFO.jpg',      photos: ['images/2.jpeg'] },
+            femei:   { en: 'For Women',  ro: 'Pentru Femei',     cover: 'images/for_women.jpg', photos: ['images/3.jpeg', 'images/4.jpeg'] },
+            ems:     { en: 'EMS Shape',  ro: 'EMS Shape',        cover: 'images/ems_shape.jpg', photos: ['images/5.jpeg'] },
+            barbati: { en: 'For Men',    ro: 'Pentru Bărbați',   cover: 'images/for_men.jpg',   photos: ['images/6.jpeg', 'images/7.jpeg'] },
+        };
+
+        function openPricePanel(key) {
+            const lang = typeof currentLang !== 'undefined' ? currentLang : 'en';
+            const data = priceData[key];
+            document.getElementById('pp-title').textContent = data[lang];
+            document.getElementById('pp-cover').src = data.cover;
+            document.getElementById('pp-cover').alt = data[lang];
+            document.getElementById('pp-photos').innerHTML = data.photos
+                .map(src => `<img src="${src}" alt="Price list" onclick="openPriceZoom('${src}')">`)
+                .join('');
+            document.getElementById('price-panel').classList.add('open');
+            document.getElementById('price-backdrop').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePricePanel() {
+            document.getElementById('price-panel').classList.remove('open');
+            document.getElementById('price-backdrop').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function openPriceZoom(src) {
+            document.getElementById('price-zoom-img').src = src;
+            document.getElementById('price-zoom').classList.add('active');
+        }
+
+        function closePriceZoom() {
+            document.getElementById('price-zoom').classList.remove('active');
+            document.getElementById('price-zoom-img').src = '';
+        }
+
+        // ── VIDEO LIGHTBOX ──────────────────────────────────────────
+        function openVideoLightbox(src) {
+            // stop any other playing video (gallery thumbs)
+            document.querySelectorAll('.gallery-item.video-card video').forEach(v => v.pause());
+            // stop photo lightbox if open
+            closeLightbox();
+
+            const lv = document.getElementById('lightbox-video');
+            lv.src = src;
+            lv.load();
+            lv.play();
+            document.getElementById('video-lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeVideoLightbox() {
+            const lv = document.getElementById('lightbox-video');
+            lv.pause();
+            lv.src = '';
+            document.getElementById('video-lightbox').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function closeVideoLightboxOnBg(e) {
+            if (e.target === document.getElementById('video-lightbox')) closeVideoLightbox();
+        }
+
+        // LANGUAGE SWITCHER
+        let currentLang = 'en';
+
+        function setLang(lang) {
+            currentLang = lang;
+            // update button states
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.textContent.toLowerCase() === lang);
+            });
+            // translate all elements with data-en / data-ro
+            document.querySelectorAll('[data-en]').forEach(el => {
+                el.innerHTML = el.getAttribute('data-' + lang);
+            });
+            // translate input placeholders
+            document.querySelectorAll('[data-en-placeholder]').forEach(el => {
+                el.placeholder = el.getAttribute('data-' + lang + '-placeholder');
+            });
+        }
+    </script>
+
+</body>
+</html>
