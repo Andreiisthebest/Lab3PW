@@ -163,170 +163,6 @@
             line-height: 1.8;
         }
 
-        /*  ABOUT  */
-        .about { background: var(--white); }
-
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .about-photo {
-            width: 100%;
-            border-radius: 20px;
-            box-shadow: var(--shadow-lg);
-            display: block;
-            object-fit: cover;
-        }
-
-        .about-text h2 {
-            font-size: 2rem;
-            color: var(--text-dark);
-            margin-bottom: 1.5rem;
-            line-height: 1.3;
-        }
-
-        .about-text h2 span { color: var(--primary-color); }
-
-        .about-text p {
-            color: var(--text-light);
-            line-height: 1.8;
-            margin-bottom: 1.25rem;
-        }
-
-        .about-stats {
-            display: flex;
-            gap: 2rem;
-            margin-top: 2.5rem;
-        }
-
-        .stat { text-align: center; }
-        .stat .number { font-size: 2rem; font-weight: 700; color: var(--primary-color); }
-        .stat .label  { font-size: 0.85rem; color: var(--text-light); }
-
-        /*  SERVICES  */
-        .services { background: var(--bg-light); }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            grid-auto-rows: 1fr;
-            gap: 2.5rem;
-        }
-
-        .service-card {
-            background: var(--white);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: var(--shadow-lg);
-            transition: transform 0.3s, box-shadow 0.3s;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .service-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
-        }
-
-        .service-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        /* single photo card */
-        .service-card .card-img-single {
-            flex: 1;
-            overflow: hidden;
-            cursor: pointer;
-        }
-
-        /* two photos side by side */
-        .service-card .card-img-duo {
-            flex: 1;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            overflow: hidden;
-            gap: 3px;
-        }
-
-        .service-card .card-img-duo img {
-            cursor: pointer;
-            transition: opacity 0.2s;
-        }
-
-        .service-card .card-img-duo img:hover { opacity: 0.88; }
-        .service-card .card-img-single img:hover { opacity: 0.88; }
-
-        .service-card-body {
-            padding: 1.25rem 1.5rem 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .service-card-body h3 {
-            font-size: 1.2rem;
-            color: var(--text-dark);
-            font-weight: 700;
-            letter-spacing: 0.03em;
-        }
-
-        .service-card-body .view-btn {
-            font-size: 0.8rem;
-            color: var(--primary-color);
-            font-weight: 600;
-            cursor: pointer;
-            border: none;
-            background: none;
-            padding: 0;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-        }
-
-        /* service cover image */
-        .service-card .card-cover {
-            position: relative;
-            overflow: hidden;
-            height: 260px;
-            cursor: pointer;
-        }
-
-        .service-card .card-cover img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.4s;
-        }
-
-        .service-card .card-cover:hover img { transform: scale(1.04); }
-
-        .service-card .card-cover .cover-overlay {
-            position: absolute;
-            inset: 0;
-            background: rgba(0,0,0,0.18);
-            display: flex;
-            align-items: flex-end;
-            padding: 1rem 1.25rem;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .service-card .card-cover:hover .cover-overlay { opacity: 1; }
-
-        .cover-overlay span {
-            color: #fff;
-            font-weight: 700;
-            font-size: 0.85rem;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-        }
-
         /* PRICE PANEL */
         .price-panel-backdrop {
             display: none;
@@ -971,7 +807,6 @@
            RESPONSIVE – TABLET  (769 – 1024 px)
            =========================================== */
         @media (min-width: 769px) and (max-width: 1024px) {
-            .about-grid          { grid-template-columns: 1fr; gap: 2.5rem; }
             .services-grid       { grid-template-columns: 1fr 1fr; }
             .team-grid           { grid-template-columns: repeat(2, 1fr); }
             .testimonials-grid   { grid-template-columns: 1fr 1fr; }
@@ -1025,15 +860,6 @@
             .section-header         { margin-bottom: 2rem; }
             .section-header h2      { font-size: 1.7rem; }
             .section-header p       { font-size: 0.92rem; }
-
-            /* --- About --- */
-            .about-grid  { grid-template-columns: 1fr; gap: 2rem; }
-            .about-text h2 { font-size: 1.6rem; }
-            .about-stats { gap: 1.25rem; }
-            .stat .number { font-size: 1.6rem; }
-
-            /* --- Services --- */
-            .services-grid { grid-template-columns: 1fr; gap: 1.5rem; }
 
             /* --- Gallery --- */
             .gallery-grid { grid-template-columns: 1fr; }
@@ -1353,31 +1179,48 @@
     <!-- 
          ABOUT
      -->
-    <section class="about" id="about">
-        <div class="section-inner container">
-            <div class="about-grid">
-                <div class="about-image">
-                    <img src="images/16.png" alt="SVET MEDICAL Salon" class="about-photo">
+    <!-- ABOUT -->
+    <section class="bg-white py-20 px-8" id="about">
+        <div class="max-w-[1600px] mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
+
+                <!-- Photo -->
+                <div>
+                    <img src="images/16.png" alt="SVET MEDICAL Salon"
+                         class="w-full rounded-[20px] shadow-card-lg block object-cover">
                 </div>
-                <div class="about-text">
-                    <h2 data-en="More than a salon <br>a <span>medical experience</span>" data-ro="Mai mult decât un salon <br>o <span>experiență medicală</span>">More than a salon <br>a <span>medical experience</span></h2>
-                    <p data-en="SVET MEDICAL was founded on the belief that true beauty comes from within. Our certified specialists combine medical-grade treatments with personalised care to help you look and feel your best." data-ro="SVET MEDICAL a fost fondată pe convingerea că frumusețea adevărată vine din interior. Specialiștii noștri certificați combină tratamente medicale cu îngrijire personalizată.">SVET MEDICAL was founded on the belief that true beauty comes from within. Our certified specialists combine medical-grade treatments with personalised care to help you look and feel your best.</p>
-                    <p data-en="From advanced skin therapies to classic beauty rituals, every visit is a step toward a more confident you." data-ro="De la terapii avansate pentru piele la ritualuri clasice de frumusețe, fiecare vizită este un pas spre o versiune mai încrezătoare a ta.">From advanced skin therapies to classic beauty rituals, every visit is a step toward a more confident you.</p>
-                    <div class="about-stats">
-                        <div class="stat">
-                            <div class="number">10+</div>
-                            <div class="label" data-en="Years of Experience" data-ro="Ani de Experiență">Years of Experience</div>
+
+                <!-- Text -->
+                <div>
+                    <h2 class="font-display text-[1.6rem] md:text-[2rem] text-text-dark leading-[1.3] mb-6"
+                        data-en="More than a salon <br>a <span class='text-primary'>medical experience</span>"
+                        data-ro="Mai mult decât un salon <br>o <span class='text-primary'>experiență medicală</span>">More than a salon <br>a <span class="text-primary">medical experience</span></h2>
+
+                    <p class="text-text-light leading-[1.8] mb-5"
+                       data-en="SVET MEDICAL was founded on the belief that true beauty comes from within. Our certified specialists combine medical-grade treatments with personalised care to help you look and feel your best."
+                       data-ro="SVET MEDICAL a fost fondată pe convingerea că frumusețea adevărată vine din interior. Specialiștii noștri certificați combină tratamente medicale cu îngrijire personalizată.">SVET MEDICAL was founded on the belief that true beauty comes from within. Our certified specialists combine medical-grade treatments with personalised care to help you look and feel your best.</p>
+
+                    <p class="text-text-light leading-[1.8] mb-5"
+                       data-en="From advanced skin therapies to classic beauty rituals, every visit is a step toward a more confident you."
+                       data-ro="De la terapii avansate pentru piele la ritualuri clasice de frumusețe, fiecare vizită este un pas spre o versiune mai încrezătoare a ta.">From advanced skin therapies to classic beauty rituals, every visit is a step toward a more confident you.</p>
+
+                    <!-- Stats -->
+                    <div class="flex gap-8 md:gap-8 mt-10">
+                        <div class="text-center">
+                            <div class="text-[1.6rem] md:text-[2rem] font-bold text-primary leading-tight">10+</div>
+                            <div class="text-[0.85rem] text-text-light mt-1" data-en="Years of Experience" data-ro="Ani de Experiență">Years of Experience</div>
                         </div>
-                        <div class="stat">
-                            <div class="number">3k+</div>
-                            <div class="label" data-en="Happy Clients" data-ro="Clienți Fericiți">Happy Clients</div>
+                        <div class="text-center">
+                            <div class="text-[1.6rem] md:text-[2rem] font-bold text-primary leading-tight">3k+</div>
+                            <div class="text-[0.85rem] text-text-light mt-1" data-en="Happy Clients" data-ro="Clienți Fericiți">Happy Clients</div>
                         </div>
-                        <div class="stat">
-                            <div class="number">25+</div>
-                            <div class="label" data-en="Treatments" data-ro="Tratamente">Treatments</div>
+                        <div class="text-center">
+                            <div class="text-[1.6rem] md:text-[2rem] font-bold text-primary leading-tight">25+</div>
+                            <div class="text-[0.85rem] text-text-light mt-1" data-en="Treatments" data-ro="Tratamente">Treatments</div>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
@@ -1385,60 +1228,95 @@
     <!-- 
          SERVICES
      -->
-    <section class="services" id="services">
-        <div class="section-inner container">
-            <div class="section-header">
-                <span class="eyebrow" data-en="What We Offer" data-ro="Ce Oferim">What We Offer</span>
-                <h2 data-en="Our Services" data-ro="Serviciile Noastre">Our Services</h2>
-                <p data-en="A selection of medical aesthetic and beauty treatments, designed especially for you." data-ro="O selec&#x21B;ie de tratamente estetice medicale &#x219;i de &#xEE;nfrumuse&#x21B;are, g&#xE2;ndite special pentru tine.">A selection of medical aesthetic and beauty treatments, designed especially for you.</p>
+    <!-- SERVICES -->
+    <section class="bg-bg-light py-20 px-8" id="services">
+        <div class="max-w-[1600px] mx-auto">
+
+            <!-- Header -->
+            <div class="text-center mb-14">
+                <span class="text-[0.8rem] tracking-[0.22em] uppercase text-primary font-semibold block mb-3"
+                      data-en="What We Offer" data-ro="Ce Oferim">What We Offer</span>
+                <h2 class="font-display text-[2.2rem] text-text-dark mb-4"
+                    data-en="Our Services" data-ro="Serviciile Noastre">Our Services</h2>
+                <p class="text-text-light max-w-[560px] mx-auto leading-[1.8]"
+                   data-en="A selection of medical aesthetic and beauty treatments, designed especially for you."
+                   data-ro="O selec&#x21B;ie de tratamente estetice medicale &#x219;i de înfrumuse&#x21B;are, gândite special pentru tine.">A selection of medical aesthetic and beauty treatments, designed especially for you.</p>
             </div>
-            <div class="services-grid">
+
+            <!-- Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
 
                 <!-- HIFU -->
-                <div class="service-card" onclick="openPricePanel('hifu')" style="cursor:pointer">
-                    <div class="card-cover">
-                        <img src="images/HIFO.jpg" alt="HIFU">
-                        <div class="cover-overlay"><span data-en="View Prices" data-ro="Vezi Prețuri">View Prices</span></div>
+                <div class="bg-white rounded-[20px] overflow-hidden shadow-card-lg hover:-translate-y-1.5 hover:shadow-[0_20px_50px_rgba(0,0,0,0.15)] transition-all duration-300 flex flex-col cursor-pointer"
+                     onclick="openPricePanel('hifu')">
+                    <div class="relative overflow-hidden h-[260px] group">
+                        <img src="images/HIFO.jpg" alt="HIFU"
+                             class="w-full h-full object-cover block transition-transform duration-300 group-hover:scale-[1.04]">
+                        <div class="absolute inset-0 bg-black/20 flex items-end p-5 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                            <span class="text-white font-bold text-[0.85rem] tracking-[0.08em] uppercase"
+                                  data-en="View Prices" data-ro="Vezi Prețuri">View Prices</span>
+                        </div>
                     </div>
-                    <div class="service-card-body">
-                        <h3>HIFU</h3>
-                        <button class="view-btn" data-en="View Prices &rsaquo;" data-ro="Vezi Pre&#x21B;uri &rsaquo;">View Prices &rsaquo;</button>
+                    <div class="px-6 py-5 flex items-center justify-between">
+                        <h3 class="text-[1.2rem] text-text-dark font-bold tracking-[0.03em]">HIFU</h3>
+                        <button class="text-[0.8rem] text-primary font-semibold uppercase tracking-[0.05em] bg-transparent border-0 p-0 cursor-pointer"
+                                data-en="View Prices &rsaquo;" data-ro="Vezi Pre&#x21B;uri &rsaquo;">View Prices &rsaquo;</button>
                     </div>
                 </div>
 
-                <!-- Pentru Femei -->
-                <div class="service-card" onclick="openPricePanel('femei')" style="cursor:pointer">
-                    <div class="card-cover">
-                        <img src="images/for_women.jpg" alt="For Women">
-                        <div class="cover-overlay"><span data-en="View Prices" data-ro="Vezi Prețuri">View Prices</span></div>
+                <!-- For Women -->
+                <div class="bg-white rounded-[20px] overflow-hidden shadow-card-lg hover:-translate-y-1.5 hover:shadow-[0_20px_50px_rgba(0,0,0,0.15)] transition-all duration-300 flex flex-col cursor-pointer"
+                     onclick="openPricePanel('femei')">
+                    <div class="relative overflow-hidden h-[260px] group">
+                        <img src="images/for_women.jpg" alt="For Women"
+                             class="w-full h-full object-cover block transition-transform duration-300 group-hover:scale-[1.04]">
+                        <div class="absolute inset-0 bg-black/20 flex items-end p-5 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                            <span class="text-white font-bold text-[0.85rem] tracking-[0.08em] uppercase"
+                                  data-en="View Prices" data-ro="Vezi Prețuri">View Prices</span>
+                        </div>
                     </div>
-                    <div class="service-card-body">
-                        <h3 data-en="For Women" data-ro="Pentru Femei">For Women</h3>
-                        <button class="view-btn" data-en="View Prices &rsaquo;" data-ro="Vezi Pre&#x21B;uri &rsaquo;">View Prices &rsaquo;</button>
+                    <div class="px-6 py-5 flex items-center justify-between">
+                        <h3 class="text-[1.2rem] text-text-dark font-bold tracking-[0.03em]"
+                            data-en="For Women" data-ro="Pentru Femei">For Women</h3>
+                        <button class="text-[0.8rem] text-primary font-semibold uppercase tracking-[0.05em] bg-transparent border-0 p-0 cursor-pointer"
+                                data-en="View Prices &rsaquo;" data-ro="Vezi Pre&#x21B;uri &rsaquo;">View Prices &rsaquo;</button>
                     </div>
                 </div>
 
                 <!-- EMS Shape -->
-                <div class="service-card" onclick="openPricePanel('ems')" style="cursor:pointer">
-                    <div class="card-cover">
-                        <img src="images/ems_shape.jpg" alt="EMS Shape">
-                        <div class="cover-overlay"><span data-en="View Prices" data-ro="Vezi Prețuri">View Prices</span></div>
+                <div class="bg-white rounded-[20px] overflow-hidden shadow-card-lg hover:-translate-y-1.5 hover:shadow-[0_20px_50px_rgba(0,0,0,0.15)] transition-all duration-300 flex flex-col cursor-pointer"
+                     onclick="openPricePanel('ems')">
+                    <div class="relative overflow-hidden h-[260px] group">
+                        <img src="images/ems_shape.jpg" alt="EMS Shape"
+                             class="w-full h-full object-cover block transition-transform duration-300 group-hover:scale-[1.04]">
+                        <div class="absolute inset-0 bg-black/20 flex items-end p-5 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                            <span class="text-white font-bold text-[0.85rem] tracking-[0.08em] uppercase"
+                                  data-en="View Prices" data-ro="Vezi Prețuri">View Prices</span>
+                        </div>
                     </div>
-                    <div class="service-card-body">
-                        <h3>EMS Shape</h3>
-                        <button class="view-btn" data-en="View Prices &rsaquo;" data-ro="Vezi Pre&#x21B;uri &rsaquo;">View Prices &rsaquo;</button>
+                    <div class="px-6 py-5 flex items-center justify-between">
+                        <h3 class="text-[1.2rem] text-text-dark font-bold tracking-[0.03em]">EMS Shape</h3>
+                        <button class="text-[0.8rem] text-primary font-semibold uppercase tracking-[0.05em] bg-transparent border-0 p-0 cursor-pointer"
+                                data-en="View Prices &rsaquo;" data-ro="Vezi Pre&#x21B;uri &rsaquo;">View Prices &rsaquo;</button>
                     </div>
                 </div>
 
-                <!-- Pentru Bărbați -->
-                <div class="service-card" onclick="openPricePanel('barbati')" style="cursor:pointer">
-                    <div class="card-cover">
-                        <img src="images/for_men.jpg" alt="For Men">
-                        <div class="cover-overlay"><span data-en="View Prices" data-ro="Vezi Prețuri">View Prices</span></div>
+                <!-- For Men -->
+                <div class="bg-white rounded-[20px] overflow-hidden shadow-card-lg hover:-translate-y-1.5 hover:shadow-[0_20px_50px_rgba(0,0,0,0.15)] transition-all duration-300 flex flex-col cursor-pointer"
+                     onclick="openPricePanel('barbati')">
+                    <div class="relative overflow-hidden h-[260px] group">
+                        <img src="images/for_men.jpg" alt="For Men"
+                             class="w-full h-full object-cover block transition-transform duration-300 group-hover:scale-[1.04]">
+                        <div class="absolute inset-0 bg-black/20 flex items-end p-5 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                            <span class="text-white font-bold text-[0.85rem] tracking-[0.08em] uppercase"
+                                  data-en="View Prices" data-ro="Vezi Prețuri">View Prices</span>
+                        </div>
                     </div>
-                    <div class="service-card-body">
-                        <h3 data-en="For Men" data-ro="Pentru Bărbați">For Men</h3>
-                        <button class="view-btn" data-en="View Prices &rsaquo;" data-ro="Vezi Pre&#x21B;uri &rsaquo;">View Prices &rsaquo;</button>
+                    <div class="px-6 py-5 flex items-center justify-between">
+                        <h3 class="text-[1.2rem] text-text-dark font-bold tracking-[0.03em]"
+                            data-en="For Men" data-ro="Pentru Bărbați">For Men</h3>
+                        <button class="text-[0.8rem] text-primary font-semibold uppercase tracking-[0.05em] bg-transparent border-0 p-0 cursor-pointer"
+                                data-en="View Prices &rsaquo;" data-ro="Vezi Pre&#x21B;uri &rsaquo;">View Prices &rsaquo;</button>
                     </div>
                 </div>
 
