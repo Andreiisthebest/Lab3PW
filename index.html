@@ -43,588 +43,118 @@
     </script>
 
     <style>
-        :root {
-            --primary-color: #c9a96e;
-            --primary-dark: #a07840;
-            --secondary-color: #f3e9d2;
-            --text-dark: #2c2c2c;
-            --text-light: #7a7a7a;
-            --bg-light: #fdf8f2;
-            --white: #ffffff;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
-            --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.12);
-        }
-
+        /* ── Base resets ───────────────────────────── */
         *, *::before, *::after { box-sizing: border-box; }
+        body  { font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        h1, h2, h3 {
-            font-family: 'Playfair Display', serif;
-        }
-
-        /*  GLOBAL CONTAINER  */
-        .container {
-            width: min(1600px, 100% - 4rem);
-            margin-inline: auto;
-        }
-
+        /* ── Shared button components ──────────────── */
         .btn-primary {
-            background: var(--primary-color);
-            color: var(--white);
-            padding: 0.85rem 2rem;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            border: 2px solid var(--primary-color);
+            background: #c9a96e; color: #fff;
+            padding: 0.85rem 2rem; border-radius: 30px;
+            font-weight: 600; font-size: 0.95rem;
+            border: 2px solid #c9a96e;
             transition: background 0.3s, transform 0.2s;
-            text-decoration: none;
+            text-decoration: none; display: inline-block;
         }
-
-        .btn-primary:hover {
-            background: var(--primary-dark);
-            border-color: var(--primary-dark);
-            transform: translateY(-2px);
-        }
+        .btn-primary:hover  { background: #a07840; border-color: #a07840; transform: translateY(-2px); }
 
         .btn-outline {
-            background: transparent;
-            color: var(--primary-color);
-            padding: 0.85rem 2rem;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            border: 2px solid var(--primary-color);
+            background: transparent; color: #c9a96e;
+            padding: 0.85rem 2rem; border-radius: 30px;
+            font-weight: 600; font-size: 0.95rem;
+            border: 2px solid #c9a96e;
             transition: background 0.3s, color 0.3s, transform 0.2s;
-            text-decoration: none;
+            text-decoration: none; display: inline-block;
+        }
+        .btn-outline:hover { background: #c9a96e; color: #fff; transform: translateY(-2px); }
+
+        /* ── Language switcher ─────────────────────── */
+        .lang-btn { background: none; border: none; padding: 0.35rem 0.75rem; font-size: 0.8rem; font-weight: 600; cursor: pointer; color: #c9a96e; letter-spacing: 0.05em; transition: background 0.2s, color 0.2s; }
+        .lang-btn.active { background: #c9a96e; color: #fff; }
+
+        /* ── Mobile nav open overlay (body class toggled by JS) ── */
+        .mobile-nav-open #nav-toggle span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .mobile-nav-open #nav-toggle span:nth-child(2) { opacity: 0; }
+        .mobile-nav-open #nav-toggle span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+        .mobile-nav-open #nav-links {
+            display: flex !important; flex-direction: column; position: fixed; inset: 0;
+            background: white; z-index: 1050; align-items: center; justify-content: center;
+            gap: 2rem; font-size: 1.2rem; list-style: none; margin: 0; padding: 0;
+        }
+        .mobile-nav-open #lang-switcher-el {
+            display: flex !important; position: fixed; bottom: 3rem; left: 50%;
+            transform: translateX(-50%); z-index: 1050;
+            border: 1.5px solid #c9a96e; border-radius: 20px; overflow: hidden;
         }
 
-        .btn-outline:hover {
-            background: var(--primary-color);
-            color: var(--white);
-            transform: translateY(-2px);
-        }
-
-
-        /* PRICE PANEL */
-        .price-panel-backdrop {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.55);
-            z-index: 9000;
-        }
-
+        /* ── Price panel (right-slide transition — not possible in Tailwind) ── */
+        .price-panel-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 9000; }
         .price-panel-backdrop.active { display: block; }
-
         .price-panel {
-            position: fixed;
-            top: 0;
-            right: -520px;
-            width: min(500px, 100vw);
-            height: 100vh;
-            background: var(--white);
-            z-index: 9001;
-            overflow-y: auto;
+            position: fixed; top: 0; right: -520px; width: min(500px,100vw); height: 100vh;
+            background: #fff; z-index: 9001; overflow-y: auto;
             transition: right 0.35s cubic-bezier(.4,0,.2,1);
-            display: flex;
-            flex-direction: column;
+            display: flex; flex-direction: column;
         }
-
         .price-panel.open { right: 0; }
+        @media (max-width: 768px) { .price-panel { width: 100vw; right: -100vw; } }
 
-        .price-panel-header {
-            position: sticky;
-            top: 0;
-            background: var(--white);
-            padding: 1.5rem 1.75rem 1rem;
-            border-bottom: 1px solid #f0e8db;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            z-index: 1;
-        }
+        /* ── Overlay active states (display toggled by JS via .active) ── */
+        .price-zoom-overlay  { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.96); z-index: 10000; align-items: center; justify-content: center; padding: 1.5rem; }
+        .price-zoom-overlay.active  { display: flex; }
+        .lightbox-overlay    { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 9999; align-items: center; justify-content: center; flex-direction: column; }
+        .lightbox-overlay.active    { display: flex; }
+        .video-lightbox      { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.94); z-index: 9999; align-items: center; justify-content: center; }
+        .video-lightbox.active      { display: flex; }
 
-        .price-panel-header h2 {
-            font-size: 1.5rem;
-            color: var(--text-dark);
-            margin: 0;
-        }
-
-        .price-panel-close {
-            background: none;
-            border: none;
-            font-size: 1.6rem;
-            cursor: pointer;
-            color: var(--text-dark);
-            opacity: 0.6;
-            line-height: 1;
-            transition: opacity 0.2s;
-        }
-
-        .price-panel-close:hover { opacity: 1; }
-
-        .price-panel-cover {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            display: block;
-        }
-
-        .price-panel-body {
-            padding: 1.25rem 1.75rem;
-            flex: 1;
-        }
-
-        #pp-photos {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        #pp-photos img {
-            width: 100%;
-            border-radius: 10px;
-            display: block;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-            cursor: zoom-in;
-            transition: opacity 0.2s;
-        }
-
-        #pp-photos img:hover { opacity: 0.9; }
-
-        /* price photo zoom overlay */
-        .price-zoom-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.96);
-            z-index: 10000;
-            align-items: center;
-            justify-content: center;
-            padding: 1.5rem;
-        }
-
-        .price-zoom-overlay.active { display: flex; }
-
-        .price-zoom-overlay img {
-            max-width: 92vw;
-            max-height: 92vh;
-            border-radius: 12px;
-            object-fit: contain;
-            box-shadow: 0 8px 48px rgba(0,0,0,0.6);
-            cursor: zoom-out;
-        }
-
-        .price-zoom-close {
-            position: fixed;
-            top: 1.25rem;
-            right: 1.5rem;
-            color: #fff;
-            font-size: 2rem;
-            cursor: pointer;
-            background: none;
-            border: none;
-            z-index: 10001;
-            opacity: 0.75;
-            transition: opacity 0.2s;
-            line-height: 1;
-        }
-
-        .price-zoom-close:hover { opacity: 1; }
-
-        .price-panel-cta {
-            margin: 1.5rem 1.75rem 2rem;
-            display: block;
-            text-align: center;
-            background: var(--primary-color);
-            color: #fff;
-            font-weight: 700;
-            font-size: 0.95rem;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            padding: 0.9rem;
-            border-radius: 10px;
-            text-decoration: none;
-            transition: background 0.2s;
-        }
-
-        .price-panel-cta:hover { background: var(--primary-dark); }
-
-        /* -- LIGHTBOX ------------------------------- */
-        .lightbox-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.92);
-            z-index: 9999;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-        }
-
-        .lightbox-overlay.active { display: flex; }
-
-        .lightbox-img-wrap {
-            position: relative;
-            max-width: 90vw;
-            max-height: 85vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .lightbox-img-wrap img {
-            max-width: 90vw;
-            max-height: 80vh;
-            object-fit: contain;
-            border-radius: 12px;
-            box-shadow: 0 8px 40px rgba(0,0,0,0.6);
-        }
-
-        .lightbox-close {
-            position: fixed;
-            top: 1.25rem;
-            right: 1.5rem;
-            color: #fff;
-            font-size: 2rem;
-            cursor: pointer;
-            background: none;
-            border: none;
-            line-height: 1;
-            z-index: 10000;
-            opacity: 0.8;
-            transition: opacity 0.2s;
-        }
-
-        .lightbox-close:hover { opacity: 1; }
-
-        .lightbox-arrow {
-            position: fixed;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255,255,255,0.15);
-            border: none;
-            color: #fff;
-            font-size: 2rem;
-            width: 52px;
-            height: 52px;
-            border-radius: 50%;
-            cursor: pointer;
-            z-index: 10000;
-            transition: background 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .lightbox-arrow:hover { background: rgba(255,255,255,0.3); }
-        .lightbox-arrow.prev { left: 1rem; }
-        .lightbox-arrow.next { right: 1rem; }
-
-        .lightbox-counter {
-            color: rgba(255,255,255,0.7);
-            font-size: 0.85rem;
-            margin-top: 1rem;
-            letter-spacing: 0.1em;
-        }
-
-        /* video lightbox */
-        .video-lightbox {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.94);
-            z-index: 9999;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .video-lightbox.active { display: flex; }
-
-        .video-lightbox video {
-            max-width: 90vw;
-            max-height: 85vh;
-            border-radius: 16px;
-            box-shadow: 0 8px 40px rgba(0,0,0,0.6);
-        }
-
-        .video-lightbox-close {
-            position: fixed;
-            top: 1.25rem;
-            right: 1.5rem;
-            color: #fff;
-            font-size: 2rem;
-            cursor: pointer;
-            background: none;
-            border: none;
-            z-index: 10000;
-            opacity: 0.8;
-            transition: opacity 0.2s;
-        }
-
-        .video-lightbox-close:hover { opacity: 1; }
-
-        /* ===========================================
-           MOBILE STICKY CTA BAR
-           =========================================== */
-        .mobile-cta-bar {
-            display: none; /* hidden on desktop */
-        }
-
-        @media (max-width: 768px) {
-            .mobile-cta-bar {
-                display: flex;
-                position: fixed;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                z-index: 900;
-                background: var(--white);
-                border-top: 1px solid #f0e8db;
-                padding: 0.75rem 1.25rem calc(0.75rem + env(safe-area-inset-bottom));
-                gap: 0.75rem;
-                align-items: center;
-                box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
-            }
-
-            .mobile-cta-bar a.btn-primary {
-                flex: 1;
-                text-align: center;
-                padding: 0.8rem 1rem;
-                font-size: 1rem;
-            }
-
-            .mobile-cta-bar a.btn-outline {
-                flex-shrink: 0;
-                padding: 0.8rem 1.1rem;
-                font-size: 0.9rem;
-            }
-
-            /* give the page bottom padding so last section isn't hidden behind the bar */
-            footer {
-                padding-bottom: calc(1.5rem + 72px);
-            }
-        }
-
-        /* Lang switcher – active state toggled by JS */
-        .lang-btn {
-            background: none;
-            border: none;
-            padding: 0.35rem 0.75rem;
-            font-size: 0.8rem;
-            font-weight: 600;
-            cursor: pointer;
-            color: var(--primary-color);
-            letter-spacing: 0.05em;
-            transition: background 0.2s, color 0.2s;
-        }
-        .lang-btn.active {
-            background: var(--primary-color);
-            color: var(--white);
-        }
-
-        /* ===========================================
-           RESPONSIVE – TABLET  (769 – 1024 px)
-           =========================================== */
-
-
-        /* ===========================================
-           RESPONSIVE – MOBILE  (≤ 768 px)
-           =========================================== */
-        @media (max-width: 768px) {
-
-            /* container */
-            .container { width: min(100%, 100% - 1.5rem); }
-
-            /* --- Mobile nav open state --- */
-            .mobile-nav-open #nav-toggle span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-            .mobile-nav-open #nav-toggle span:nth-child(2) { opacity: 0; }
-            .mobile-nav-open #nav-toggle span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-
-            .mobile-nav-open #nav-links {
-                display: flex !important;
-                flex-direction: column;
-                position: fixed;
-                inset: 0;
-                background: white;
-                z-index: 1050;
-                align-items: center;
-                justify-content: center;
-                gap: 2rem;
-                font-size: 1.2rem;
-                list-style: none;
-                margin: 0;
-                padding: 0;
-            }
-
-            .mobile-nav-open #lang-switcher-el {
-                display: flex !important;
-                position: fixed;
-                bottom: 3rem;
-                left: 50%;
-                transform: translateX(-50%);
-                z-index: 1050;
-                border: 1.5px solid var(--primary-color);
-                border-radius: 20px;
-                overflow: hidden;
-            }
-
-            /* --- Price panel full-width on mobile --- */
-            .price-panel { width: 100vw; right: -100vw; }
-        }
-
-        /* ===========================================
-           MASCOT – STELLA
-           =========================================== */
+        /* ── Mascot – Stella ───────────────────────── */
         .mascot-widget {
-            position: fixed;
-            bottom: 2rem;
-            right: 1.5rem;
-            z-index: 8000;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.35rem;
-            cursor: pointer;
-            user-select: none;
-            /* hidden off-screen to the right until delay fires */
-            opacity: 0;
-            transform: translateX(140px);
-            pointer-events: none;
-            transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: fixed; bottom: 2rem; right: 1.5rem; z-index: 8000;
+            display: flex; flex-direction: column; align-items: center; gap: 0.35rem;
+            cursor: pointer; user-select: none;
+            opacity: 0; transform: translateX(140px); pointer-events: none;
+            transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.34,1.56,0.64,1);
         }
-
-        /* class added by JS after delay – slides Stella into view */
         .mascot-widget.mascot-visible {
-            opacity: 1;
-            transform: translateX(0);
-            pointer-events: auto;
-            /* 1. Whole body: gentle float/jump up-down */
+            opacity: 1; transform: translateX(0); pointer-events: auto;
             animation: mascot-float 2.6s ease-in-out infinite;
         }
-
-        .mascot-widget.mascot-visible svg {
-            /* 2. Full SVG: slow side-to-side tilt */
-            animation: mascot-tilt 3.2s ease-in-out infinite alternate;
-            transform-origin: center bottom;
-        }
-
-        /* Sparkles – pulse in and out */
-        #mascot-sparkles {
-            animation: mascot-sparkle 2s ease-in-out infinite alternate;
-        }
-
-        /* ---- keyframes ---- */
+        .mascot-widget.mascot-visible svg { animation: mascot-tilt 3.2s ease-in-out infinite alternate; transform-origin: center bottom; }
+        #mascot-sparkles { animation: mascot-sparkle 2s ease-in-out infinite alternate; }
         @keyframes mascot-float {
-            0%, 100% { transform: translateX(0) translateY(0);    }
+            0%, 100% { transform: translateX(0) translateY(0); }
             40%       { transform: translateX(0) translateY(-10px); }
-            60%       { transform: translateX(0) translateY(-7px);  }
+            60%       { transform: translateX(0) translateY(-7px); }
         }
-
-        @keyframes mascot-tilt {
-            0%   { transform: rotate(-5deg); }
-            100% { transform: rotate(5deg);  }
-        }
-
-        @keyframes mascot-wand-wave {
-            0%   { transform: rotate(0deg);   }
-            25%  { transform: rotate(-18deg); }
-            75%  { transform: rotate(14deg);  }
-            100% { transform: rotate(0deg);   }
-        }
-
+        @keyframes mascot-tilt  { 0% { transform: rotate(-5deg); } 100% { transform: rotate(5deg); } }
         @keyframes mascot-sparkle {
             0%   { opacity: 1;   transform: scale(1);    }
             50%  { opacity: 0.3; transform: scale(0.75); }
             100% { opacity: 1;   transform: scale(1.15); }
         }
-
-        .mascot-widget svg {
-            filter: drop-shadow(0 6px 18px rgba(201,169,110,0.35));
-            display: block;
-        }
-
+        .mascot-widget svg  { filter: drop-shadow(0 6px 18px rgba(201,169,110,0.35)); display: block; }
         .mascot-label {
-            font-family: 'Playfair Display', serif;
-            font-size: 0.72rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            letter-spacing: 0.08em;
-            text-align: center;
+            font-family: 'Playfair Display', serif; font-size: 0.72rem; font-weight: 700;
+            color: #c9a96e; letter-spacing: 0.08em; text-align: center;
             text-shadow: 0 1px 4px rgba(255,255,255,0.9);
         }
-
-        /* --- Speech bubble tooltip --- */
         .mascot-bubble {
-            position: absolute;
-            bottom: calc(100% + 14px);
-            right: 0;
-            width: 190px;
-            background: var(--white);
-            border: 2px solid var(--primary-color);
-            border-radius: 14px;
-            padding: 0.65rem 0.85rem;
-            font-size: 0.82rem;
-            line-height: 1.45;
-            color: var(--text-dark);
-            font-family: 'Inter', sans-serif;
-            box-shadow: 0 6px 24px rgba(201,169,110,0.22);
-            pointer-events: none;
-            opacity: 0;
-            transform: translateY(8px) scale(0.92);
-            transform-origin: bottom right;
+            position: absolute; bottom: calc(100% + 14px); right: 0; width: 190px;
+            background: #fff; border: 2px solid #c9a96e; border-radius: 14px;
+            padding: 0.65rem 0.85rem; font-size: 0.82rem; line-height: 1.45; color: #2c2c2c;
+            font-family: 'Inter', sans-serif; box-shadow: 0 6px 24px rgba(201,169,110,0.22);
+            pointer-events: none; opacity: 0;
+            transform: translateY(8px) scale(0.92); transform-origin: bottom right;
             transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.34,1.56,0.64,1);
         }
-
-        /* downward tail */
-        .mascot-bubble::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            right: 22px;
-            border-left: 9px solid transparent;
-            border-right: 9px solid transparent;
-            border-top: 10px solid var(--primary-color);
-        }
-        .mascot-bubble::before {
-            content: '';
-            position: absolute;
-            bottom: -7px;
-            right: 24px;
-            border-left: 7px solid transparent;
-            border-right: 7px solid transparent;
-            border-top: 8px solid var(--white);
-            z-index: 1;
-        }
-
-        .mascot-bubble strong {
-            display: block;
-            font-size: 0.88rem;
-            color: var(--primary-color);
-            margin-bottom: 0.2rem;
-        }
-
-        /* show bubble on widget hover */
-        .mascot-widget:hover .mascot-bubble {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
-
-        /* On mobile, push mascot above the sticky CTA bar (~72px) */
+        .mascot-bubble::after  { content: ''; position: absolute; bottom: -10px; right: 22px; border-left: 9px solid transparent; border-right: 9px solid transparent; border-top: 10px solid #c9a96e; }
+        .mascot-bubble::before { content: ''; position: absolute; bottom: -7px;  right: 24px; border-left: 7px solid transparent; border-right: 7px solid transparent; border-top: 8px solid #fff; z-index: 1; }
+        .mascot-bubble strong  { display: block; font-size: 0.88rem; color: #c9a96e; margin-bottom: 0.2rem; }
+        .mascot-widget:hover .mascot-bubble { opacity: 1; transform: translateY(0) scale(1); }
         @media (max-width: 768px) {
-            .mascot-widget {
-                bottom: calc(72px + 1rem);
-                right: 0.75rem;
-            }
-
-            .mascot-widget svg {
-                width: 64px;
-                height: auto;
-            }
+            .mascot-widget     { bottom: calc(72px + 1rem); right: 0.75rem; }
+            .mascot-widget svg { width: 64px; height: auto; }
         }
     </style>
 </head>
@@ -1193,8 +723,8 @@
 
     <!-- PRICE PHOTO ZOOM -->
     <div class="price-zoom-overlay" id="price-zoom" onclick="closePriceZoom()">
-        <button class="price-zoom-close" onclick="closePriceZoom()">&times;</button>
-        <img id="price-zoom-img" src="" alt="Price list">
+        <button class="fixed top-5 right-6 text-white text-[2rem] bg-transparent border-none cursor-pointer z-[10001] opacity-75 hover:opacity-100 transition-opacity leading-none" onclick="closePriceZoom()">&times;</button>
+        <img id="price-zoom-img" src="" alt="Price list" class="max-w-[92vw] max-h-[92vh] rounded-[12px] object-contain shadow-[0_8px_48px_rgba(0,0,0,0.6)] cursor-zoom-out">
     </div>
 
     <!-- PRICE PANEL BACKDROP -->
@@ -1202,32 +732,33 @@
 
     <!-- PRICE PANEL -->
     <aside class="price-panel" id="price-panel">
-        <div class="price-panel-header">
-            <h2 id="pp-title">HIFU</h2>
-            <button class="price-panel-close" onclick="closePricePanel()">&times;</button>
+        <div class="sticky top-0 bg-white px-7 pt-6 pb-4 border-b border-[#f0e8db] flex items-center justify-between z-10">
+            <h2 class="font-display text-[1.5rem] text-text-dark m-0" id="pp-title">HIFU</h2>
+            <button class="bg-transparent border-none text-[1.6rem] cursor-pointer text-text-dark opacity-60 hover:opacity-100 transition-opacity leading-none" onclick="closePricePanel()">&times;</button>
         </div>
-        <img class="price-panel-cover" id="pp-cover" src="" alt="">
-        <div class="price-panel-body">
-            <div id="pp-photos"></div>
+        <img class="w-full h-[180px] object-cover block" id="pp-cover" src="" alt="">
+        <div class="px-7 py-5 flex-1">
+            <div id="pp-photos" class="flex flex-col gap-4"></div>
         </div>
-        <a href="#booking" class="price-panel-cta" onclick="closePricePanel()" data-en="Book an Appointment" data-ro="Programeaz&#x103;-te">Book an Appointment</a>
+        <a href="#booking" class="mx-7 mb-8 block text-center bg-primary text-white font-bold text-[0.95rem] tracking-[0.06em] uppercase py-[0.9rem] rounded-[10px] no-underline hover:bg-primary-dark transition-colors"
+           onclick="closePricePanel()" data-en="Book an Appointment" data-ro="Programeaz&#x103;-te">Book an Appointment</a>
     </aside>
 
     <!-- VIDEO LIGHTBOX -->
     <div class="video-lightbox" id="video-lightbox" onclick="closeVideoLightboxOnBg(event)">
-        <button class="video-lightbox-close" onclick="closeVideoLightbox()">&times;</button>
-        <video id="lightbox-video" controls autoplay playsinline style="max-width:90vw;max-height:85vh;border-radius:16px;"></video>
+        <button class="fixed top-5 right-6 text-white text-[2rem] bg-transparent border-none cursor-pointer z-[10000] opacity-80 hover:opacity-100 transition-opacity leading-none" onclick="closeVideoLightbox()">&times;</button>
+        <video id="lightbox-video" controls autoplay playsinline class="max-w-[90vw] max-h-[85vh] rounded-[16px] shadow-[0_8px_40px_rgba(0,0,0,0.6)]"></video>
     </div>
 
-    <!-- LIGHTBOX --> ----------------------------------- -->
+    <!-- LIGHTBOX -->
     <div class="lightbox-overlay" id="lightbox" onclick="closeLightboxOnBg(event)">
-        <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
-        <button class="lightbox-arrow prev" onclick="lightboxNav(-1)">&#8249;</button>
-        <div class="lightbox-img-wrap">
-            <img id="lightbox-img" src="" alt="">
+        <button class="fixed top-5 right-6 text-white text-[2rem] bg-transparent border-none cursor-pointer leading-none z-[10000] opacity-80 hover:opacity-100 transition-opacity" onclick="closeLightbox()">&times;</button>
+        <button class="lightbox-arrow fixed top-1/2 -translate-y-1/2 left-4 bg-white/15 border-none text-white text-[2rem] w-[52px] h-[52px] rounded-full cursor-pointer z-[10000] hover:bg-white/30 transition-colors flex items-center justify-center" onclick="lightboxNav(-1)">&#8249;</button>
+        <div class="relative max-w-[90vw] max-h-[85vh] flex items-center justify-center">
+            <img id="lightbox-img" src="" alt="" class="max-w-[90vw] max-h-[80vh] object-contain rounded-[12px] shadow-[0_8px_40px_rgba(0,0,0,0.6)]">
         </div>
-        <button class="lightbox-arrow next" onclick="lightboxNav(1)">&#8250;</button>
-        <div class="lightbox-counter" id="lightbox-counter"></div>
+        <button class="lightbox-arrow fixed top-1/2 -translate-y-1/2 right-4 bg-white/15 border-none text-white text-[2rem] w-[52px] h-[52px] rounded-full cursor-pointer z-[10000] hover:bg-white/30 transition-colors flex items-center justify-center" onclick="lightboxNav(1)">&#8250;</button>
+        <div class="text-white/70 text-[0.85rem] mt-4 tracking-[0.1em]" id="lightbox-counter"></div>
     </div>
 
     <script>
@@ -1302,7 +833,7 @@
             document.getElementById('pp-cover').src = data.cover;
             document.getElementById('pp-cover').alt = data[lang];
             document.getElementById('pp-photos').innerHTML = data.photos
-                .map(src => `<img src="${src}" alt="Price list" onclick="openPriceZoom('${src}')">`)
+                .map(src => `<img src="${src}" alt="Price list" onclick="openPriceZoom('${src}')" class="w-full rounded-[10px] block shadow-[0_2px_12px_rgba(0,0,0,0.08)] cursor-zoom-in hover:opacity-90 transition-opacity">`)
                 .join('');
             document.getElementById('price-panel').classList.add('open');
             document.getElementById('price-backdrop').classList.add('active');
@@ -1524,9 +1055,9 @@
     </div>
 
     <!-- MOBILE STICKY CTA BAR -->
-    <div class="mobile-cta-bar" aria-label="Quick booking actions">
-        <a href="#booking" class="btn-primary" data-en="Book an Appointment" data-ro="Fă o Programare">Book an Appointment</a>
-        <a href="tel:+40788844819" class="btn-outline" aria-label="Call us">&#128222; Call</a>
+    <div class="hidden max-[768px]:flex fixed bottom-0 left-0 right-0 z-[900] bg-white border-t border-[#f0e8db] px-5 gap-3 items-center shadow-[0_-4px_20px_rgba(0,0,0,0.1)] py-3 [padding-bottom:calc(0.75rem+env(safe-area-inset-bottom))]" aria-label="Quick booking actions">
+        <a href="#booking" class="btn-primary flex-1 text-center !py-3 !px-4 !text-base" data-en="Book an Appointment" data-ro="Fă o Programare">Book an Appointment</a>
+        <a href="tel:+40788844819" class="btn-outline flex-shrink-0 !py-3 !px-[1.1rem] !text-[0.9rem]" aria-label="Call us">&#128222; Call</a>
     </div>
 
 </body>
