@@ -1381,6 +1381,18 @@
             gap: 0.35rem;
             cursor: pointer;
             user-select: none;
+            /* hidden off-screen to the right until delay fires */
+            opacity: 0;
+            transform: translateX(140px);
+            pointer-events: none;
+            transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        /* class added by JS after delay – slides Stella into view */
+        .mascot-widget.mascot-visible {
+            opacity: 1;
+            transform: translateX(0);
+            pointer-events: auto;
         }
 
         .mascot-widget svg {
@@ -2003,6 +2015,12 @@
         function closeVideoLightboxOnBg(e) {
             if (e.target === document.getElementById('video-lightbox')) closeVideoLightbox();
         }
+
+        // MASCOT – appear after 3-second delay
+        setTimeout(function() {
+            var mascot = document.getElementById('mascot');
+            if (mascot) mascot.classList.add('mascot-visible');
+        }, 3000);
 
         // MOBILE NAV TOGGLE
         function toggleMobileNav() {
