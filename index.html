@@ -72,80 +72,6 @@
             margin-inline: auto;
         }
 
-        /*  NAVIGATION - */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: var(--white);
-            box-shadow: var(--shadow);
-            z-index: 1000;
-        }
-
-        .nav-container {
-            padding: 1rem 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .logo-img {
-            height: 80px;
-            width: auto;
-            display: block;
-            object-fit: contain;
-        }
-
-        .logo-text {
-            font-size: 1.4rem;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            color: var(--text-dark);
-        }
-
-        .logo-text span {
-            color: var(--primary-color);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: var(--text-dark);
-            font-weight: 500;
-            font-size: 0.95rem;
-            letter-spacing: 0.03em;
-            transition: color 0.3s;
-            text-decoration: none;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary-color);
-        }
-
-        .nav-cta {
-            background: var(--primary-color);
-            color: var(--white) !important;
-            padding: 0.6rem 1.4rem;
-            border-radius: 25px;
-            font-weight: 600 !important;
-            transition: background 0.3s, transform 0.2s;
-        }
-
-        .nav-cta:hover {
-            background: var(--primary-dark) !important;
-            transform: translateY(-2px);
-        }
-
         /*  HERO  */
         .hero {
             margin-top: 74px;
@@ -1202,20 +1128,7 @@
             }
         }
 
-        /* HAMBURGER TOGGLE – hidden on desktop */
-        .nav-toggle {
-            display: none;
-        }
-
-        /* LANGUAGE SWITCHER */
-        .lang-switcher {
-            display: flex;
-            gap: 0.25rem;
-            margin-left: 1.5rem;
-            border: 1.5px solid var(--primary-color);
-            border-radius: 20px;
-            overflow: hidden;
-        }
+        /* Lang switcher – active state toggled by JS */
         .lang-btn {
             background: none;
             border: none;
@@ -1252,62 +1165,37 @@
             /* container */
             .container { width: min(100%, 100% - 1.5rem); }
 
-            /* --- Nav --- */
-            .nav-links    { display: none; }
-            .lang-switcher { display: none; }
+            /* --- Mobile nav open state --- */
+            .mobile-nav-open #nav-toggle span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+            .mobile-nav-open #nav-toggle span:nth-child(2) { opacity: 0; }
+            .mobile-nav-open #nav-toggle span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
-            .nav-container { padding: 0.6rem 0; }
-
-            .logo-img  { height: 50px; }
-            .logo-text { font-size: 1.1rem; }
-
-            .nav-toggle {
-                display: flex;
-                flex-direction: column;
-                gap: 5px;
-                background: none;
-                border: none;
-                cursor: pointer;
-                padding: 6px;
-                margin-left: auto;
-                z-index: 1100;
-            }
-
-            .nav-toggle span {
-                display: block;
-                width: 24px;
-                height: 2px;
-                background: var(--text-dark);
-                border-radius: 2px;
-                transition: transform 0.3s, opacity 0.3s;
-            }
-
-            /* open state – X shape */
-            .mobile-nav-open .nav-toggle span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-            .mobile-nav-open .nav-toggle span:nth-child(2) { opacity: 0; }
-            .mobile-nav-open .nav-toggle span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-
-            /* full-screen mobile menu */
-            .mobile-nav-open .nav-links {
-                display: flex;
+            .mobile-nav-open #nav-links {
+                display: flex !important;
                 flex-direction: column;
                 position: fixed;
                 inset: 0;
-                background: var(--white);
+                background: white;
                 z-index: 1050;
                 align-items: center;
                 justify-content: center;
                 gap: 2rem;
                 font-size: 1.2rem;
+                list-style: none;
+                margin: 0;
+                padding: 0;
             }
 
-            .mobile-nav-open .lang-switcher {
-                display: flex;
+            .mobile-nav-open #lang-switcher-el {
+                display: flex !important;
                 position: fixed;
                 bottom: 3rem;
                 left: 50%;
                 transform: translateX(-50%);
                 z-index: 1050;
+                border: 1.5px solid var(--primary-color);
+                border-radius: 20px;
+                overflow: hidden;
             }
 
             /* --- Hero --- */
@@ -1554,34 +1442,41 @@
 </head>
 <body>
 
-    <!-- 
-         NAVIGATION
-     -->
-    <nav>
-        <div class="nav-container container">
-            <div class="logo-wrapper">
-                <!-- LOGO PLACEHOLDER -->
-                <img src="images/logo.jpeg" alt="SVET MEDICAL Logo" class="logo-img">
-                <div class="logo-text">SVET <span>MEDICAL</span></div>
+    <!-- NAVIGATION -->
+    <nav class="fixed top-0 w-full bg-white shadow-card z-[1000] font-sans">
+        <div class="max-w-[1600px] mx-auto px-8 py-3 md:py-4 flex justify-between items-center">
+
+            <!-- Logo -->
+            <div class="flex items-center gap-3">
+                <img src="images/logo.jpeg" alt="SVET MEDICAL Logo" class="h-[50px] md:h-[80px] w-auto block object-contain">
+                <div class="text-[1.1rem] md:text-[1.4rem] font-bold tracking-[0.08em] text-text-dark">SVET <span class="text-primary">MEDICAL</span></div>
             </div>
-            <!-- Hamburger button (mobile only) -->
-            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" onclick="toggleMobileNav()">
-                <span></span><span></span><span></span>
+
+            <!-- Hamburger (mobile only) -->
+            <button id="nav-toggle" aria-label="Toggle navigation" onclick="toggleMobileNav()"
+                class="flex md:hidden flex-col gap-[5px] bg-transparent border-0 cursor-pointer p-1.5 ml-auto z-[1100]">
+                <span class="block w-6 h-[2px] bg-text-dark rounded transition-all duration-300"></span>
+                <span class="block w-6 h-[2px] bg-text-dark rounded transition-all duration-300"></span>
+                <span class="block w-6 h-[2px] bg-text-dark rounded transition-all duration-300"></span>
             </button>
 
-            <ul class="nav-links" id="nav-links">
-                <li><a href="#about" data-en="About" data-ro="Despre">About</a></li>
-                <li><a href="#services" data-en="Services" data-ro="Servicii">Services</a></li>
-                <li><a href="#gallery" data-en="Gallery" data-ro="Galerie">Gallery</a></li>
-                <li><a href="#team" data-en="Our Team" data-ro="Echipa">Our Team</a></li>
-                <li><a href="#contact" data-en="Contact" data-ro="Contact">Contact</a></li>
-                <li><a href="#booking" class="nav-cta" data-en="Book Now" data-ro="Programare">Book Now</a></li>
-                <li class="mobile-close-nav" style="display:none"><button onclick="toggleMobileNav()" style="background:none;border:none;font-size:2rem;cursor:pointer;color:var(--text-dark);line-height:1;">&times;</button></li>
+            <!-- Nav links -->
+            <ul id="nav-links" class="hidden md:flex gap-8 items-center list-none m-0 p-0">
+                <li><a href="#about" class="text-text-dark font-medium text-[0.95rem] tracking-[0.03em] no-underline transition-colors duration-300 hover:text-primary" data-en="About" data-ro="Despre">About</a></li>
+                <li><a href="#services" class="text-text-dark font-medium text-[0.95rem] tracking-[0.03em] no-underline transition-colors duration-300 hover:text-primary" data-en="Services" data-ro="Servicii">Services</a></li>
+                <li><a href="#gallery" class="text-text-dark font-medium text-[0.95rem] tracking-[0.03em] no-underline transition-colors duration-300 hover:text-primary" data-en="Gallery" data-ro="Galerie">Gallery</a></li>
+                <li><a href="#team" class="text-text-dark font-medium text-[0.95rem] tracking-[0.03em] no-underline transition-colors duration-300 hover:text-primary" data-en="Our Team" data-ro="Echipa">Our Team</a></li>
+                <li><a href="#contact" class="text-text-dark font-medium text-[0.95rem] tracking-[0.03em] no-underline transition-colors duration-300 hover:text-primary" data-en="Contact" data-ro="Contact">Contact</a></li>
+                <li><a href="#booking" class="bg-primary text-white px-[1.4rem] py-[0.6rem] rounded-full font-semibold text-[0.95rem] no-underline transition-all duration-300 hover:bg-primary-dark hover:-translate-y-0.5" data-en="Book Now" data-ro="Programare">Book Now</a></li>
+                <li class="mobile-close-nav hidden"><button onclick="toggleMobileNav()" class="bg-transparent border-0 text-[2rem] cursor-pointer text-text-dark leading-none">&times;</button></li>
             </ul>
-            <div class="lang-switcher">
+
+            <!-- Language switcher -->
+            <div id="lang-switcher-el" class="hidden md:flex ml-6 border border-primary rounded-full overflow-hidden">
                 <button class="lang-btn active" onclick="setLang('en')">EN</button>
                 <button class="lang-btn" onclick="setLang('ro')">RO</button>
             </div>
+
         </div>
     </nav>
 
@@ -2186,7 +2081,7 @@
             // show/hide the × close item inside the menu
             const closeItem = document.querySelector('.mobile-close-nav');
             if (closeItem) {
-                closeItem.style.display = document.body.classList.contains('mobile-nav-open') ? 'list-item' : 'none';
+                closeItem.classList.toggle('hidden', !document.body.classList.contains('mobile-nav-open'));
             }
         }
 
@@ -2276,9 +2171,12 @@
 
             <!-- Left arm + wand — on top of body, pivot at shoulder (18,102) -->
             <g id="mascot-wand-arm">
-                <path d="M18,102 Q3,118 8,140" stroke="#fcd5b0" stroke-width="12" stroke-linecap="round" fill="none"/>
-                <line x1="8" y1="140" x2="-1" y2="162" stroke="#c9a96e" stroke-width="3.5" stroke-linecap="round"/>
-                <g transform="translate(-1,150)">
+                <!-- Arm from shoulder down to hand -->
+                <path d="M18,102 Q4,112 10,128" stroke="#fcd5b0" stroke-width="12" stroke-linecap="round" fill="none"/>
+                <!-- Wand stick: from hand upward to star tip -->
+                <line x1="10" y1="128" x2="0" y2="88" stroke="#c9a96e" stroke-width="3.5" stroke-linecap="round"/>
+                <!-- Wand star at the TIP (top) of the wand -->
+                <g transform="translate(0,88)">
                     <polygon points="0,-9 2.5,-2.8 9.5,-2.7 4,1.8 5.5,8.5 0,5 -5.5,8.5 -4,1.8 -9.5,-2.7 -2.5,-2.8" fill="#c9a96e"/>
                     <polygon points="0,-6 1.7,-1.9 6,-1.8 2.7,1.2 3.8,5.6 0,3.4 -3.8,5.6 -2.7,1.2 -6,-1.8 -1.7,-1.9" fill="#f3e9d2"/>
                 </g>
