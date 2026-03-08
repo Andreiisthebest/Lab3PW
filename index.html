@@ -654,13 +654,32 @@
                                   data-en="Mon - Sat: 9:00 AM - 8:00 PM" data-ro="Lun - Sâm: 09:00 - 20:00">Mon - Sat: 9:00 AM - 8:00 PM</span>
                         </div>
                     </div>
+
+                    <div class="flex items-start gap-4 mb-6">
+                        <div class="w-11 h-11 bg-secondary rounded-full flex items-center justify-center flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                                <circle cx="12" cy="12" r="4"/>
+                                <circle cx="17.5" cy="6.5" r="1" fill="#c9a96e" stroke="none"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <strong class="block text-text-dark text-[0.9rem] mb-0.5">Instagram</strong>
+                            <a href="https://www.instagram.com/svetmedical" target="_blank" rel="noopener"
+                               class="text-primary text-[0.9rem] hover:text-primary-dark transition-colors no-underline">@svetmedical</a>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Map placeholder -->
-                <div class="w-full aspect-[4/3] bg-secondary border-2 border-dashed border-primary rounded-[16px] flex flex-col items-center justify-center gap-3 text-primary text-[0.9rem]">
-                    <span class="text-[2.5rem]">🗺️</span>
-                    <strong>Map Placeholder</strong>
-                    <span>Embed Google Maps here</span>
+                <!-- Google Maps embed -->
+                <div class="w-full aspect-[4/3] rounded-[16px] overflow-hidden shadow-card-lg">
+                    <iframe
+                        src="https://maps.google.com/maps?q=44.4693977,26.1102239&output=embed&z=17"
+                        width="100%" height="100%"
+                        style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="SVET MEDICAL location"
+                        class="w-full h-full block"></iframe>
                 </div>
 
             </div>
