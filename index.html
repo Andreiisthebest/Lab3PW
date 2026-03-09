@@ -18,7 +18,7 @@
                     colors: {
                         primary:   '#c9a96e',
                         'primary-dark': '#a07840',
-                        secondary: '#f3e9d2',
+           1             secondary: '#f3e9d2',
                         'text-dark':  '#2c2c2c',
                         'text-light': '#7a7a7a',
                         'bg-light':   '#fdf8f2',
@@ -113,21 +113,39 @@
             position: fixed; bottom: 2rem; right: 1.5rem; z-index: 8000;
             display: flex; flex-direction: column; align-items: center; gap: 0.35rem;
             cursor: pointer; user-select: none;
-            opacity: 0; transform: translateX(140px); pointer-events: none;
-            transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.34,1.56,0.64,1);
+            /* Start hidden, slide in from right after 3s delay */
+            animation: mascot-entrance 0.7s cubic-bezier(0.34,1.56,0.64,1) 3s forwards,
+                       mascot-float 2.6s ease-in-out 3.7s infinite;
+            opacity: 0; transform: translateX(140px);
         }
-        .mascot-widget.mascot-visible {
-            opacity: 1; transform: translateX(0); pointer-events: auto;
-            animation: mascot-float 2.6s ease-in-out infinite;
+        .mascot-widget svg { 
+            animation: mascot-tilt 3.2s ease-in-out infinite alternate; 
+            transform-origin: center bottom; 
         }
-        .mascot-widget.mascot-visible svg { animation: mascot-tilt 3.2s ease-in-out infinite alternate; transform-origin: center bottom; }
-        #mascot-sparkles { animation: mascot-sparkle 2s ease-in-out infinite alternate; }
+        #mascot-sparkles { 
+            animation: mascot-sparkle 2s ease-in-out infinite alternate; 
+        }
+        
+        /* Entrance animation - slide in from right */
+        @keyframes mascot-entrance {
+            0%   { opacity: 0; transform: translateX(140px); pointer-events: none; }
+            100% { opacity: 1; transform: translateX(0); pointer-events: auto; }
+        }
+        
+        /* Float animation - vertical movement */
         @keyframes mascot-float {
             0%, 100% { transform: translateX(0) translateY(0); }
-            40%       { transform: translateX(0) translateY(-10px); }
-            60%       { transform: translateX(0) translateY(-7px); }
+            40%      { transform: translateX(0) translateY(-10px); }
+            60%      { transform: translateX(0) translateY(-7px); }
         }
-        @keyframes mascot-tilt  { 0% { transform: rotate(-5deg); } 100% { transform: rotate(5deg); } }
+        
+        /* Tilt animation - rotate character */
+        @keyframes mascot-tilt { 
+            0%   { transform: rotate(-5deg); } 
+            100% { transform: rotate(5deg); } 
+        }
+        
+        /* Sparkle animation - pulse effect */
         @keyframes mascot-sparkle {
             0%   { opacity: 1;   transform: scale(1);    }
             50%  { opacity: 0.3; transform: scale(0.75); }
@@ -902,41 +920,9 @@
             if (e.target === document.getElementById('video-lightbox')) closeVideoLightbox();
         }
 
-        // MASCOT – appear after 3-second delay
-        setTimeout(function() {
-            var mascot = document.getElementById('mascot');
-            if (mascot) mascot.classList.add('mascot-visible');
-        }, 3000);
-
-        // MASCOT – cycle through messages on each hover
-        const mascotMessages = [
-            { en: { title: "Hi, I'm Stella! ✨",   body: "Welcome to SVET MEDICAL &mdash; where beauty meets science." },
-              ro: { title: "Bună, sunt Stella! ✨", body: "Bine ai venit la SVET MEDICAL &mdash; unde frumusețea întâlnește știința." } },
-            { en: { title: "Ready to glow? 💫",    body: "Book an appointment today and treat yourself to something special." },
-              ro: { title: "Pregătit să strălucești? 💫", body: "Fă o programare azi și răsfață-te cu ceva special." } },
-            { en: { title: "Did you know? 🌿",     body: "Our medical-grade treatments are carried out by certified specialists." },
-              ro: { title: "Știai că? 🌿",          body: "Tratamentele noastre medicale sunt efectuate de specialiști certificați." } },
-            { en: { title: "Special offer! 🎁",    body: "Book online and receive a free skin consultation on your first visit." },
-              ro: { title: "Ofertă specială! 🎁",   body: "Programează-te online și primești o consultație gratuită la prima vizită." } },
-            { en: { title: "We miss you! 💛",      body: "Haven't visited yet? Come meet the SVET MEDICAL team &mdash; you'll love it." },
-              ro: { title: "Ne-ai lipsit! 💛",      body: "Nu ai vizitat încă? Vino să cunoști echipa SVET MEDICAL &mdash; o să îți placă." } },
-            { en: { title: "Looking radiant! ✨",  body: "From HIFU to EMS Shape, we have a treatment perfectly tailored for you." },
-              ro: { title: "Arăți radiant! ✨",     body: "De la HIFU la EMS Shape, avem un tratament creat special pentru tine." } },
-        ];
-        let mascotMsgIndex = 0;
-
-        (function() {
-            var mascot = document.getElementById('mascot');
-            var bubble = document.getElementById('mascot-bubble');
-            if (!mascot || !bubble) return;
-
-            mascot.addEventListener('mouseenter', function() {
-                var entry = mascotMessages[mascotMsgIndex % mascotMessages.length];
-                var msg = entry[currentLang] || entry['en'];
-                bubble.innerHTML = '<strong>' + msg.title + '</strong>' + msg.body;
-                mascotMsgIndex++;
-            });
-        })();
+        // MASCOT – Pure CSS animations (no JavaScript needed for appearance/hover)
+        // The mascot now uses CSS animations with delays for entrance and floating effects
+        // Hover tooltips are handled purely through CSS :hover pseudo-class
 
         // MOBILE NAV TOGGLE
         function toggleMobileNav() {
